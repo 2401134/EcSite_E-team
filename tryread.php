@@ -9,6 +9,8 @@
         <?php require 'header.php'; ?>
         <?php require 'menu.php'; ?>
 
+        <!--試し読み画面-->
+
         <section class="tryread section">
 
             <div class="container">
