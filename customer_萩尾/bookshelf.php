@@ -11,6 +11,8 @@
 </head>
 
 <body>
+  <?php require 'header.php'; ?>
+  <?php require 'menu.php'; ?>
   <section class="section">
     <div class="container">
       <h1 class="title has-text-left mb-5">本棚</h1>
@@ -51,5 +53,7 @@
         </div>
     </div>
   </section>
+  <?php require 'footmenu.php'; ?>
+  <?php require 'footer.php'; ?>
 </body>
 </html>
