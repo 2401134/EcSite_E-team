@@ -33,7 +33,7 @@ session_start();
             <p class="subtitle is-7">(簡単なあらすじ)</p>
               <div class="level-right">
                 <!--お気に入り登録-->
-                 <form action="favorite_add.php" method="POST" style="display:inline;">
+                 <form action="favorite-add.php" method="POST" style="display:inline;">
                   <button type="submit" name="book_id" value="<?= $i ?>" 
                     class="button is-white is-rounded" title="お気に入り登録">
                     <span class="icon">
