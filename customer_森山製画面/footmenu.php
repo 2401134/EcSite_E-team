@@ -4,7 +4,7 @@
 
     <div class="column is-narrow">
       <figure class="image is-96x96">
-        <img src="image/booknest.png" alt="BookNest ロゴ">
+        <img src="../image/booknest.png" alt="BookNest ロゴ">
       </figure>
     </div>
 

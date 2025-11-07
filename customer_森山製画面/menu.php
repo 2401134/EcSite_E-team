@@ -1,8 +1,8 @@
 <div class="header columns is-vcentered has-background-grey-light">
 
   
-  <figure class="image is-128x128">
-    <img src="image/booknest.png" width="100px" height="100px">
+  <figure class="image is-128x128 ml-5">
+    <img src="../image/booknest.png" width="100px" height="100px">
   </figure>
 
   <!-- 以下丸ボタン -->
@@ -29,7 +29,7 @@
         <span>検索</span>
       </a>
 
-      <a href="favorite-add.php" class="button is-light is-rounded">
+      <a href="favorite_add.php" class="button is-light is-rounded">
         <span class="icon"><i class="fas fa-heart"></i></span>
         <span>お気に入り</span>
       </a>
