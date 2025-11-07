@@ -4,17 +4,6 @@ require 'db-connect.php';
 require 'header.php';
 ?>
 <?php
-// UUID生成関数
-function generateUUID() {
-    return sprintf(
-        '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-        mt_rand(0, 0xffff),
-        mt_rand(0, 0x0fff) | 0x4000,
-        mt_rand(0, 0x3fff) | 0x8000,
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-    );
-}
 
 // ソルト生成関数
 function generateSalt($length = 16) {
@@ -38,8 +27,7 @@ if (!empty($_POST['user_address']) && !empty($_POST['user_password'])) {
         exit;
     }
 
-    // UUID・ソルト・ペッパー生成
-    $uuid = generateUUID();
+    // ソルト・ペッパー生成
     $salt = generateSalt();
     //$pepperも入るならここ
 
@@ -47,8 +35,8 @@ if (!empty($_POST['user_address']) && !empty($_POST['user_password'])) {
     $hashed = hash('sha256', $_POST['user_password'] . $salt);// . $pepper
 
     // usersテーブルへ登録
-    $sql = $pdo->prepare('INSERT INTO users (account_id, user_name, user_address, account_name, user_salt, user_password, sign_up_date, user_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-    $sql->execute([$uuid, '未登録', $_POST['user_address'], '未登録', $salt, $hashed, $now, 0]);
+    $sql = $pdo->prepare('INSERT INTO users (account_id, user_name, user_address, account_name, user_salt, user_password, sign_up_date, user_status) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?)');
+    $sql->execute(['未登録', $_POST['user_address'], '未登録', $salt, $hashed, $now, 0]);
 
     // 登録されたユーザーIDを取得
     $user_id = $pdo->lastInsertId();
