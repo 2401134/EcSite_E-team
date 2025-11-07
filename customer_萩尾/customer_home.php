@@ -18,9 +18,19 @@ session_start();
   <section class="section">
   <div class="container">
     <div class="columns is-multiline">
-      <!-- ここから繰り返し部分（PHPでループ） -->
-       <?php
-       for($i=0;$i<3;$i++){?>
+     <?php
+      try {
+          // 🔹 booksテーブルからデータを取得
+          $sql = "SELECT book_id, title, synopsis, sample FROM books";
+          $stmt = $pdo->query($sql);
+
+          // 🔹 1件ずつ表示
+          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+              $book_id = htmlspecialchars($row['book_id'], ENT_QUOTES, 'UTF-8');
+              $title = htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8');
+              $synopsis = htmlspecialchars($row['synopsis'], ENT_QUOTES, 'UTF-8');
+              $image_path = !empty($row['sample']) ? htmlspecialchars($row['sample'], ENT_QUOTES, 'UTF-8') : 'images/sample.jpg';
+      ?>
       <div class="column is-one-third">
         <div class="card">
           <div class="card-image">
@@ -53,8 +63,12 @@ session_start();
           </div>
         </div>
       </div>
-      <!-- 繰り返しここまで -->
-         <?php }?>
+      <?php
+          } // while 終了
+      } catch (PDOException $e) {
+          echo "<p>データベースエラー: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . "</p>";
+      }
+      ?>
     </div>
   </div>
 </section>
