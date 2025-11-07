@@ -37,7 +37,7 @@
 
             <div class="column is-2">
               <figure class="image is-3by4">
-                <img src="image/hyousi1.png" alt="雨とパレット">
+                <img src="images/hyousi1.png" alt="雨とパレット">
               </figure>
             </div>
 
