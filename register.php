@@ -41,9 +41,10 @@ if (!empty($_POST['user_address']) && !empty($_POST['user_password'])) {
     // UUID・ソルト・ペッパー生成
     $uuid = generateUUID();
     $salt = generateSalt();
+    //$pepperも入るならここ
 
     // パスワードハッシュ化（パスワード + ソルト + ペッパー）
-    $hashed = hash('sha256', $_POST['user_password'] . $salt);
+    $hashed = hash('sha256', $_POST['user_password'] . $salt);// . $pepper
 
     // usersテーブルへ登録
     $sql = $pdo->prepare('INSERT INTO users (account_id, user_name, user_address, account_name, user_salt, user_password, sign_up_date, user_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
