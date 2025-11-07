@@ -48,9 +48,9 @@ if (!empty($_POST['user_address']) && !empty($_POST['user_password'])) {
     // セッションに保存
     $_SESSION['user_id'] = $user_id;
 
-    echo '<p>登録が完了しました。ログイン画面へ移動します。</p>';
+    header("Location: login-input.php");
 
 } else {
-    header("Location: touroku.php?error=" . urlencode("すべて入力してください。"));
+    header("Location: register-input.php");
 }
 ?>

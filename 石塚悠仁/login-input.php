@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>2.顧客用ログイン画面</title>
+    <title>BOOK NEST ログイン</title>
 </head>
 <body>
 

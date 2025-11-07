@@ -64,7 +64,7 @@
             ログアウトしました。
         </p>
 
-        <a href="login.php" class="re-login-btn">
+        <a href="login-input.php" class="re-login-btn">
             再ログイン
         </a>
     </div>

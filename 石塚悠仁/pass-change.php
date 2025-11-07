@@ -85,7 +85,7 @@
             パスワード変更
         </button>
         
-        <a href="login.html" class="btn">
+        <a href="login-input.html" class="btn">
             ログイン画面へ戻る
         </a>
         
