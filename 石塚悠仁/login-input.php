@@ -9,6 +9,13 @@
     <div style="text-align: center;">
         <img src="img/booknest.png" alt="books">    
     </div>
+
+    <?php
+    if (isset($_SESSION["alert"])) {
+        $message = $_SESSION["alert"];
+        unset($_SESSION["alert"]);
+    }
+    ?>
     
     <form action="#" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
         

@@ -73,6 +73,12 @@
 <body>
   <img src="logo.png" alt="サイトロゴ">
 
+  <?php
+  if (isset($_SESSION["alert"])) {
+      $message = $_SESSION["alert"];
+      unset($_SESSION["alert"]);
+  }
+  ?>
   <div class="register-container">
     <form action="register.php" method="post">
       <label for="email">メールアドレス</label>

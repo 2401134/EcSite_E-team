@@ -1,9 +1,10 @@
 <?php
 session_start();
 require 'db-connect.php';
-require 'header.php';
 ?>
 <?php
+
+$user_address = htmlspecialchars($_POST['user_address'], ENT_QUOTES, 'UTF-8');
 
 // ソルト生成関数
 function generateSalt($length = 16) {
@@ -14,16 +15,20 @@ function generateSalt($length = 16) {
 $now = date('Y-m-d H:i:s');
 
 // 入力チェック
-if (!empty($_POST['user_address']) && !empty($_POST['user_password'])) {
+if (!empty($user_address) && !empty($_POST['user_password'])) {
 
     $pdo = new PDO($connect, USER, PASS);
 
     // すでに同じメールが登録されていないか確認
-    $sql = $pdo->prepare('SELECT * FROM users WHERE user_address = ?');
-    $sql->execute([$_POST['user_address']]);
-    if ($sql->fetch()) {
-        echo '<p>このメールアドレスはすでに登録されています。</p>';
-        require 'footer.php';
+    try{$sql = $pdo->prepare('SELECT * FROM users WHERE user_address = ?');
+        $sql->execute([$user_address]);
+        if ($sql->fetch()) {
+            $_SESSION['alert'] = "このメールアドレスは既に登録されています。";
+            exit;
+        }
+    }catch(PDOException $e){
+        $_SESSION['alert'] = $e;
+        header("Location: login-input.php");
         exit;
     }
 
@@ -36,7 +41,7 @@ if (!empty($_POST['user_address']) && !empty($_POST['user_password'])) {
 
     // usersテーブルへ登録
     $sql = $pdo->prepare('INSERT INTO users (account_id, user_name, user_address, account_name, user_salt, user_password, sign_up_date, user_status) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?)');
-    $sql->execute(['未登録', $_POST['user_address'], '未登録', $salt, $hashed, $now, 0]);
+    $sql->execute(['未登録', $user_address, '未登録', $salt, $hashed, $now, 0]);
 
     // 登録されたユーザーIDを取得
     $user_id = $pdo->lastInsertId();
@@ -49,8 +54,11 @@ if (!empty($_POST['user_address']) && !empty($_POST['user_password'])) {
     $_SESSION['user_id'] = $user_id;
 
     header("Location: login-input.php");
+    exit;
 
 } else {
+    $_SESSION['alert'] = "入力してください。";
     header("Location: register-input.php");
+    exit;
 }
 ?>
