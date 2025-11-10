@@ -27,7 +27,7 @@ if (!empty($user_address) && !empty($_POST['user_password'])) {
             exit;
         }
     }catch(PDOException $e){
-        $_SESSION['alert'] = $e;
+        //$_SESSION['alert'] = $e;
         header("Location: login-input.php");
         exit;
     }
@@ -57,7 +57,7 @@ if (!empty($user_address) && !empty($_POST['user_password'])) {
     exit;
 
 } else {
-    $_SESSION['alert'] = "入力してください。";
+    //$_SESSION['alert'] = "入力してください。";
     header("Location: register-input.php");
     exit;
 }
