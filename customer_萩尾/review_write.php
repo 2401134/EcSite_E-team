@@ -1,14 +1,12 @@
 <?php
 session_start();
 require_once 'db-connect.php'; 
+$pdo = new PDO($connect, USER, PASS);
+
 
 $msg = ''; // 投稿メッセージ初期化
 
 try {
-    // DB接続
-    $pdo = new PDO($connect, USER, PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     // book_idをGETとPOSTの両方から取得
     $book_id = (int)($_POST['book_id'] ?? $_GET['book_id'] ?? 0);
 
