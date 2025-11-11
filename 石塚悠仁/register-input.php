@@ -80,12 +80,12 @@
   }
   ?>
   <div class="register-container">
-    <form action="register.php" method="post">
+    <form action="register-output.php" method="post">
       <label for="email">メールアドレス</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="user_address" required>
 
       <label for="password">パスワード</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" id="password" name="user_password" required>
 
       <button type="submit">新規登録</button>
     </form>
