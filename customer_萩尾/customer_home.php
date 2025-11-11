@@ -2,6 +2,7 @@
 session_start();
 require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // 仮ユーザーID
 $user_id = 1;
@@ -18,8 +19,8 @@ try {
     $fav_stmt->execute([$user_id]);
     $favorites = $fav_stmt->fetchAll(PDO::FETCH_COLUMN, 0); // 配列で取得
 
-} catch (PDOException $e) {
-    die("DBエラー: " . echo($e->getMessage()));
+}catch (PDOException $e) {
+    die("DBエラー: " . $e->getMessage());
 }
 ?>
 <!DOCTYPE html>
@@ -41,9 +42,10 @@ try {
 
 <?php foreach ($books as $row){
     $book_id = (int)$row['book_id'];
-    $title = echo($row['title']);
-    $synopsis = echo($row['synopsis']);
-    $image_path = !empty($row['sample']) ? echo($row['sample']) : 'images/sample.jpg';
+    $title = $row['title'];
+    $synopsis =$row['synopsis'];
+    $image_path = !empty($row['sample']) ? $row['sample'] : 'images/sample.jpg';
+    $is_fav = in_array($book_id, $favorites); // お気に入り済みか
 ?>
 
 <div class="column is-one-third">
