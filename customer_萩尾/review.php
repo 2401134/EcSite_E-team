@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
+$pdo = new PDO($connect, USER, PASS);
 
 // book_idを取得
 $book_id = $_GET['book_id'] ?? 0;
