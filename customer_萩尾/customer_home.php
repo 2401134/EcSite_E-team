@@ -19,7 +19,7 @@ try {
     $favorites = $fav_stmt->fetchAll(PDO::FETCH_COLUMN, 0); // 配列で取得
 
 } catch (PDOException $e) {
-    die("DBエラー: " . htmlspecialchars($e->getMessage()));
+    die("DBエラー: " . echo($e->getMessage()));
 }
 ?>
 <!DOCTYPE html>
@@ -41,9 +41,9 @@ try {
 
 <?php foreach ($books as $row){
     $book_id = (int)$row['book_id'];
-    $title = htmlspecialchars($row['title']);
-    $synopsis = htmlspecialchars($row['synopsis']);
-    $image_path = !empty($row['sample']) ? htmlspecialchars($row['sample']) : 'images/sample.jpg';
+    $title = echo($row['title']);
+    $synopsis = echo($row['synopsis']);
+    $image_path = !empty($row['sample']) ? echo($row['sample']) : 'images/sample.jpg';
 ?>
 
 <div class="column is-one-third">
