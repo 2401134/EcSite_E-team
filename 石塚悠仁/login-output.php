@@ -18,7 +18,8 @@ if (!empty($user_address) && !empty($user_password)) {
 
     if ($user) {
         if($user['user_status'] === 1){
-            header("Location: Alogin-input.php");
+            header("Location: login-input.php");
+            exit;
         }
         // ソルト取得
         $salt = $user['user_salt'];

@@ -19,6 +19,7 @@ if (!empty($admin_id) && !empty($admin_password)) {
     if ($admin) {
         if($admin['admin_status'] === 1){
             header("Location: Alogin-input.php");
+            exit;
         }
         // ソルト取得
         $salt = $admin['admin_salt'];
