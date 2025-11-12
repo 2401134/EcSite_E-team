@@ -47,6 +47,15 @@
       <!-- 繰り返しここまで -->
          <?php }?>
     </div>
+
+    <div class="has-text-right mt-4">
+        <button class="button is-large is-black" onclick="location.href='index.html'">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+          <span>ホームに戻る</span>
+        </button>
+      </div>
   </div>
 </section>
 <?php require 'footmenu.php'; ?>

@@ -39,9 +39,16 @@
           <input class="button is-large" type="submit" value="価格検索" />
         </div>
         </div>
+        
         <div class="has-text-right mt-4">
-          <input class="button is-large is-black" type="button" value="ホームに戻る" onclick="location.href='index.html'" />
+          <button class="button is-large is-black" onclick="location.href='index.html'">
+            <span class="icon">
+              <i class="fas fa-home"></i>
+            </span>
+            <span>ホームに戻る</span>
+          </button>
         </div>
+
     </div>
   </section>  
   <?php require 'footmenu.php'; ?>
