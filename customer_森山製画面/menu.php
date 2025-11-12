@@ -2,7 +2,7 @@
 
   
   <figure class="image is-128x128 ml-5">
-    <a herf="customer_home.php"><img src="../image/booknest.png" width="100px" height="100px"></a>
+    <a href="customer_home.php"><img src="../image/booknest.png" width="100px" height="100px"></a>
   </figure>
 
   <!-- 以下丸ボタン -->
