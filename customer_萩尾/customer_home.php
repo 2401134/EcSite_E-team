@@ -77,7 +77,7 @@ require 'db-connect.php';
             </div>
           </div>
         </div>
-        <?php }; ?>
+        <?php } ?>
       </div>
     </div>
   </section>
