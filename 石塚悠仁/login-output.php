@@ -25,7 +25,7 @@ if (!empty($user_address) && !empty($user_password)) {
 
         if ($input_hashed === $user['user_password']) {
             $_SESSION['user_id'] = $user['user_id'];
-            header("Location: home.php");
+            header("Location: customer_home.php");
             exit;
         } else {
             //$_SESSION['alert'] = "パスワードが違います。";

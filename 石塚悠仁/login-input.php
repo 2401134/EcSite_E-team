@@ -28,18 +28,18 @@ session_start();
         <label for="password">パスワード</label><br>
         <input type="password" id="password" name="user_password" style="width: 100%; padding: 8px; margin-bottom: 20px; border-radius: 5px;"><br>
         
-        <button type="submit" style="width: 100%; padding: 10px; background-color: #444; color: white; border: none; cursor: pointer; border-radius: 5px;">
+        <button type="submit"  style="width: 100%; padding: 10px; background-color: #444; color: white; border: none; cursor: pointer; border-radius: 5px;">
             ログイン
         </button>
         
         <div style="text-align: center; margin-top: 15px;">
-            <a href="#">パスワードを忘れた場合</a>
+            <a href="risetto.php">パスワードを忘れた場合</a>
         </div>
         
     </form>
     
     <div style="width: 300px; margin: 20px auto 0;">
-        <a href="#" style="display: block; width: 100%; padding: 12px; background-color: #555; color: white; text-align: center; text-decoration: none; border-radius: 5px;">
+        <a href="register-input.php" style="display: block; width: 100%; padding: 12px; background-color: #555; color: white; text-align: center; text-decoration: none; border-radius: 5px;">
             新規登録へ
         </a>
     </div>
