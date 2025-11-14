@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>パスワードリセット</title>
+  <!-- Bulma -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       display: flex;
@@ -74,7 +79,7 @@
 </head>
 <body>
   
-  <img src="img/logo.png" alt="サイトロゴ">
+  <img src="../image/booknest.png" alt="サイトロゴ">
 
   <div class="register-container">
       <label for="email">メールアドレス</label>
@@ -88,5 +93,18 @@
       <button type="submit">送信</button>
     </form>  
   </div>
+
+    <div class="columns mb-4">
+      <div class ="column">
+        <form action="customer_home.php" method="POST" class="mt-2 mr-2">
+          <input type="hidden" name="action" value="home">
+          <button class="button is-dark is-normal">
+            <span class="icon"><i class="fas fa-home"></i></span>
+            <span>ホームに戻る</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
 </body>
 </html>

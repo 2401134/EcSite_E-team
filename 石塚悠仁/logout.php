@@ -8,7 +8,7 @@ session_destroy();
 <head>
   <meta charset="UTF-8">
   <title>ログアウト</title>
-  <meta http-equiv="refresh" content="3;URL=login.php"> <!-- 3秒後にログインへ -->
+  <meta http-equiv="refresh" content="3;URL=login-input.php"> <!-- 3秒後にログインへ -->
   <style>
     body {
       margin: 0;
@@ -55,9 +55,9 @@ session_destroy();
 </head>
 <body>
   <div class="logo">
-    <img src="images/logo.png" alt="ロゴ">
+    <img src="../image/booknest.png" alt="ロゴ">
   </div>
   <h1>ログアウトしました。</h1>
-  <a href="">再ログイン</a>
+  <a href="login-input.php">再ログイン</a>
 </body>
 </html>
