@@ -69,7 +69,7 @@
 
               <div class="buttons is-right">
 
-                <form action ="favorite.php" method="post">
+                <form action ="favorite_add.php" method="post">
                 <button type ="submit" class="button is-light is-rounded">
                   <span class="icon">
                     <i class="fas fa-star"></i>

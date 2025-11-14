@@ -11,7 +11,7 @@ require 'db-connect.php';
     $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // 🔹 お気に入り一覧取得
-    $fav_sql = "SELECT book_id FROM favorites WHERE user_id = ? AND favorite_status = 0";
+    $fav_sql = "SELECT book_id FROM favorites WHERE user_id = ?";
     $fav_stmt = $pdo->prepare($fav_sql);
     $fav_stmt->execute([$user_id]);
     $favorites = $fav_stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -55,7 +55,7 @@ require 'db-connect.php';
 
               <div class="level-right">
                 <!-- 🔹お気に入り登録フォーム -->
-                <form action="favarit.php" method="POST" style="display:inline;">
+                <form action="favorite_add.php" method="POST" style="display:inline;">
                   <input type="hidden" name="book_id" value="<?= $book_id ?>">
                   <button type="submit" class="button is-white is-rounded" title="お気に入り登録">
                     <span class="icon">

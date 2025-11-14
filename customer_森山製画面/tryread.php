@@ -65,7 +65,7 @@
                                 <!--お気に入りに遷移-->
 
                                 <div class="buttons is-right">
-                                <a href="favorite.php" class="button is-light is-rounded">
+                                <a href="favorite_add.php" class="button is-light is-rounded">
                                     <span class="icon"><i class="fas fa-star"></i></span>
                                 </a>
 
