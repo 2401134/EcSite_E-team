@@ -13,6 +13,7 @@ try {
                 b.title, 
                 b.synopsis, 
                 b.sample,
+                b.price,        
                 p.purchase_date
             FROM favorites f
             JOIN books b ON f.book_id = b.book_id
@@ -51,28 +52,44 @@ try {
       <h1 class="title has-text-left mb-5">お気に入り</h1>
     <?php if (!empty($favorites)){ ?>
     <?php foreach ($favorites as $book){ ?>
-      
-                     <!-- 右：購入情報 -->
-                <div class="column is-narrow has-text-right">
-                    <?php if (!empty($book['purchase_date'])){ ?>
-                        <p class="is-size-7"><?= htmlspecialchars($book['price'] ?? '') ?>円</p>
-                        <p class="is-size-7"><?= htmlspecialchars(date('Y年m月d日', strtotime($book['purchase_date']))) ?>に購入</p>
-                    <?php }else{ ?>
-                        <p class="is-size-7">この商品は未購入です</p>
-                        <form action="purchase.php" method="POST">
-                            <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
-                            <button class="button is-dark">
-                                <span>購入する</span>
-                            </button> 
-                        </form>
-                    <?php } ?>
-                </div>
+    <div class="box">
+        <div class="columns is-vcentered">
+
+            <!-- 左：表紙画像 -->
+            <div class="column is-narrow">
+                <figure class="image is-3by4" style="width: 80px; border: 1px solid #4a4a4a;">
+                    <img src="<?= htmlspecialchars($book['sample'] ?? 'images/sample.jpg') ?>" alt="小説の表紙">
+                </figure>
             </div>
+
+            <!-- 中央：タイトル・あらすじ -->
+            <div class="column">
+                <p class="title is-6"><?= htmlspecialchars($book['title']) ?></p>
+                <p class="subtitle is-7"><?= htmlspecialchars($book['synopsis']) ?></p>
+            </div>
+
+            <!-- 右：購入情報 -->
+            <div class="column is-narrow has-text-right">
+                <?php if (!empty($book['purchase_date'])){ ?>
+                    <p class="is-size-5"><strong><?= htmlspecialchars($book['price'] ?? '') ?>円</strong></p>
+                    <p class="is-size-7"><?= htmlspecialchars(date('Y年m月d日', strtotime($book['purchase_date']))) ?>に購入</p>
+                <?php }else{ ?>
+                    <p class="is-size-7"><?= htmlspecialchars($book['price'] ?? '') ?>円</p>
+                    <p class="is-size-7">この商品は未購入です</p>
+                    <form action="purchase.php" method="POST">
+                        <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
+                        <button class="button is-dark">
+                            <span>購入する</span>
+                        </button>
+                    </form>
+                <?php } ?>
+            </div>
+
         </div>
-    <?php } ?>
-<?php }else{ ?>
-    <p>お気に入りはまだ登録されていません。</p>
+    </div>
 <?php } ?>
+<?php } ?>
+
 
       <!-- 🏠 ホームに戻る -->
        <div class="has-text-right mt-5">
