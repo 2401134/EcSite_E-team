@@ -1,3 +1,37 @@
+<?php
+session_start();
+require 'db-connect.php';
+$pdo = new PDO($connect, USER, PASS);
+
+// 仮のログインユーザーID（ログイン未実装なら固定値）
+$user_id = $_SESSION['user_id'] ?? 1;
+
+try {
+    // 🔹 favorites × books × purchases を結合して購入情報を取得
+    $sql = "SELECT 
+                b.book_id, 
+                b.title, 
+                b.synopsis, 
+                b.sample,
+                p.purchase_date
+            FROM favorites f
+            JOIN books b ON f.book_id = b.book_id
+            LEFT JOIN purchases p 
+                ON f.book_id = p.book_id 
+                AND p.user_id = f.user_id
+            WHERE f.user_id = :user_id
+            AND f.favorite_status = 0 
+            ORDER BY f.favorite_id DESC";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $favorites = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "データベースエラー: " . htmlspecialchars($e->getMessage());
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,60 +49,30 @@
     <section class="section">
     <div class="container">
       <h1 class="title has-text-left mb-5">お気に入り</h1>
-
-      <!-- 📘 本のカード -->
-      <div class="box">
-        <div class="columns is-vcentered">
-          
-          <!-- 左：表紙画像 -->
-          <div class="column is-narrow">
-            <figure class="image is-3by4" style="width: 80px;border: 1px solid #4a4a4a;">
-              <img src="images/sample.jpg" alt="小説の表紙" class="has-border">
-            </figure>
-          </div>
-
-          <!-- 中央：タイトル・あらすじ -->
-          <div class="column is-text-centered">
-            <p class="title is-6">（小説の題名）</p>
-            <p class="subtitle is-7">（簡単なあらすじ）</p>
-          </div>
-
-          <!-- 右：価格・購入日 -->
-          <div class="column is-narrow has-text-right">
-            <p>円</p>
-            <p>に購入</p>
-          </div>
+    <?php if (!empty($favorites)){ ?>
+    <?php foreach ($favorites as $book){ ?>
+      
+                     <!-- 右：購入情報 -->
+                <div class="column is-narrow has-text-right">
+                    <?php if (!empty($book['purchase_date'])){ ?>
+                        <p class="is-size-7"><?= htmlspecialchars($book['price'] ?? '') ?>円</p>
+                        <p class="is-size-7"><?= htmlspecialchars(date('Y年m月d日', strtotime($book['purchase_date']))) ?>に購入</p>
+                    <?php }else{ ?>
+                        <p class="is-size-7">この商品は未購入です</p>
+                        <form action="purchase.php" method="POST">
+                            <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
+                            <button class="button is-dark">
+                                <span>購入する</span>
+                            </button> 
+                        </form>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
-      </div>
-
-       <div class="box">
-        <div class="columns is-vcentered">
-          
-          <!-- 左：表紙画像 -->
-          <div class="column is-narrow">
-            <figure class="image is-3by4" style="width: 80px;border: 1px solid #4a4a4a;">
-              <img src="images/sample.jpg" alt="小説の表紙" class="has-border">
-            </figure>
-          </div>
-
-          <!-- 中央：タイトル・あらすじ -->
-          <div class="column is-text-centered">
-            <p class="title is-6">（小説の題名）</p>
-            <p class="subtitle is-7">（簡単なあらすじ）</p>
-          </div>
-
-          <!-- 右：価格・購入日 -->
-          <div class="column is-narrow has-text-right">
-            <p>円</p>
-            <p>この商品は未購入です</p>
-           <form action="purchase.php" method="POST">
-                <button class="button is-dark">
-                    <span>購入する</span>
-                </button> 
-            </form>  
-          </div>
-        </div>
-      </div>
+    <?php } ?>
+<?php }else{ ?>
+    <p>お気に入りはまだ登録されていません。</p>
+<?php } ?>
 
       <!-- 🏠 ホームに戻る -->
        <div class="has-text-right mt-5">
