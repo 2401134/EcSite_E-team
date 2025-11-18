@@ -1,54 +1,9 @@
 <?php
-session_start();
-require_once 'db-connect.php'; 
+require_once 'db-connect.php';
+require_once '../customer_function/review_submit.php';
+
 $pdo = new PDO($connect, USER, PASS);
-
-
-$msg = ''; // 投稿メッセージ初期化
-
-try {
-    // book_idをGETとPOSTの両方から取得
-    $book_id = (int)($_POST['book_id'] ?? $_GET['book_id'] ?? 0);
-
-    // POSTで送信された場合のみ処理
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        // 仮のユーザーID（ログイン実装後は $_SESSION['user_id'] に変更）
-        $user_id = 1;
-        $review_rank = $_POST['rating'] ?? null;
-        $comment_text = trim($_POST['comment'] ?? '');
-
-        // book_idが指定されているかチェック
-        if ($book_id === 0) {
-            $msg = "エラー: book_idが指定されていません。";
-        } else {
-            // 対応する本がbooksテーブルに存在するか確認
-            $check_sql = "SELECT COUNT(*) FROM books WHERE book_id = ?";
-            $check_stmt = $pdo->prepare($check_sql);
-            $check_stmt->execute([$book_id]);
-            $exists = $check_stmt->fetchColumn();
-
-            if ($exists == 0) {
-                $msg = "エラー: 指定された書籍が存在しません。(book_id=$book_id)";
-            } 
-            // 星評価とコメントがある場合のみ投稿
-            elseif ($review_rank && $comment_text) {
-                $sql = "INSERT INTO reviews (user_id, book_id, review_rank, comment_text, upload_date)
-                        VALUES (?, ?, ?, ?, NOW())";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([$user_id, $book_id, $review_rank, $comment_text]);
-
-                $msg = "レビューを投稿しました！";
-            } else {
-                $msg = "星評価とコメントを入力してください。";
-            }
-        }
-    }
-} catch (PDOException $e) {
-    $msg = "データベースエラー: " . htmlspecialchars($e->getMessage());
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
