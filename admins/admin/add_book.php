@@ -64,6 +64,7 @@
                                 <span class="file-icon"><i class="fas fa-upload"></i></span>
                                 <span class="file-label">ファイルを選択</span>
                             </span>
+                            <span class="file-name">選択されていません</span>
                         </label>
                     </div>
                 </div>
@@ -77,6 +78,7 @@
                                 <span class="file-icon"><i class="fas fa-upload"></i></span>
                                 <span class="file-label">ファイルを選択</span>
                             </span>
+                            <span class="file-name">選択されていません</span>
                         </label>
                     </div>
                 </div>
@@ -90,6 +92,7 @@
                                 <span class="file-icon"><i class="fas fa-upload"></i></span>
                                 <span class="file-label">ファイルを選択</span>
                             </span>
+                            <span class="file-name">選択されていません</span>
                         </label>
                     </div>
                 </div>
