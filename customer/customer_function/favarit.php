@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db-connect.php';
+require '../db/db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 $user_id = $_SESSION['user_id'] ?? 1;
@@ -31,5 +31,5 @@ if($book_id > 0){
 }
 
 // 元のページに戻る
-header("Location: customer_home.php");
+header("Location:../customer_home.php");
 exit;

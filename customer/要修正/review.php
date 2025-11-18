@@ -1,27 +1,5 @@
 <?php
-session_start();
-require 'db-connect.php';
-$pdo = new PDO($connect, USER, PASS);
-
-// book_idを取得
-$book_id = $_GET['book_id'] ?? 0;
-$user_id = $_SESSION['user_id'] ?? null;
-
-try {
-    // 🔹 reviewsテーブルの実際のカラム名に合わせる
-    $sql = "SELECT r.review_id, r.user_id, r.comment_text, r.review_rank, u.user_name
-            FROM reviews r
-            JOIN users u ON r.user_id = u.user_id
-            WHERE r.book_id = :book_id
-            ORDER BY r.review_id DESC";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':book_id', $book_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "データベースエラー: " . htmlspecialchars($e->getMessage());
-    exit;
-}
+require '../functions/review1_function.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
