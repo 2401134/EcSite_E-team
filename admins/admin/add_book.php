@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="admin_function/add_book_script.js" defer></script>
 </head>
 
 <body>
@@ -59,26 +61,42 @@
                     <label class="label">表紙画像：</label>
                     <div class="file has-name is-fullwidth">
                         <label class="file-label">
-                            <input class="file-input" type="file" name="book_image" accept="image/*" required>
-                            <span class="file-cta">
-                                <span class="file-icon"><i class="fas fa-upload"></i></span>
-                                <span class="file-label">ファイルを選択</span>
-                            </span>
-                            <span class="file-name">選択されていません</span>
+                            <input class="file-input"
+                                type="file"
+                                id="book_image_input"
+                                name="book_image"
+                                accept=".png"
+                                onchange="showFileName(this, 'book_image_name')">
+                        <span class="file-cta">
+                            <span class="file-icon"><i class="fas fa-upload"></i></span>
+                            <span class="file-label">ファイルを選択</span>
+                        </span>
+                        <span id="book_image_name" class="file-name" aria-live="polite">
+                            選択されていません
+                        </span>
                         </label>
                     </div>
+
                 </div>
 
                 <div class="field">
                     <label class="label">サンプルデータ(PDF等)：</label>
                     <div class="file has-name is-fullwidth">
                         <label class="file-label">
-                            <input class="file-input" type="file" name="sample" required>
-                            <span class="file-cta">
-                                <span class="file-icon"><i class="fas fa-upload"></i></span>
-                                <span class="file-label">ファイルを選択</span>
-                            </span>
-                            <span class="file-name">選択されていません</span>
+                            <input class="file-input"
+                                type="file"
+                                id="book_sample_input"
+                                name="book_sample"
+                                accept=".pdf"
+                                onchange="showFileName(this, 'book_sample_name')"
+                            >
+                        <span class="file-cta">
+                            <span class="file-icon"><i class="fas fa-upload"></i></span>
+                            <span class="file-label">ファイルを選択</span>
+                        </span>
+                        <span id="book_sample_name" class="file-name" aria-live="polite">
+                            選択されていません
+                        </span>
                         </label>
                     </div>
                 </div>
@@ -87,12 +105,20 @@
                     <label class="label">電子書籍データ(PDF等)：</label>
                     <div class="file has-name is-fullwidth">
                         <label class="file-label">
-                            <input class="file-input" type="file" name="e_book" required>
-                            <span class="file-cta">
-                                <span class="file-icon"><i class="fas fa-upload"></i></span>
-                                <span class="file-label">ファイルを選択</span>
-                            </span>
-                            <span class="file-name">選択されていません</span>
+                            <input class="file-input"
+                                type="file"
+                                id="book_e-book_input"
+                                name="book_e-book"
+                                accept=".pdf"
+                                onchange="showFileName(this, 'book_e-book_name')"
+                            >
+                        <span class="file-cta">
+                            <span class="file-icon"><i class="fas fa-upload"></i></span>
+                            <span class="file-label">ファイルを選択</span>
+                        </span>
+                        <span id="book_e-book_name" class="file-name" aria-live="polite">
+                            選択されていません
+                        </span>
                         </label>
                     </div>
                 </div>
