@@ -41,7 +41,7 @@
         </div>
         
         <div class="has-text-right mt-4">
-          <button class="button is-large is-black" onclick="location.href='index.html'">
+          <button class="button is-large is-black" onclick="location.href='customer_home.php'">
             <span class="icon">
               <i class="fas fa-home"></i>
             </span>
