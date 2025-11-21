@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../db-connect.php';
-require '../customer_function/customer_home_func.php';
+require 'db-connect.php';
+require 'customer_function/customer_home_func.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">

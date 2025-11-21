@@ -1,5 +1,5 @@
 <?php
-require '../functions/review1_function.php';
+require 'customer_function/review1_function.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">

@@ -1,5 +1,5 @@
 <?php
-require '../customer_function/favorite_controller.php' ;
+require 'customer_function/favorite_controller.php' ;
 $favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? 1);
 ?>
 <!DOCTYPE html>
