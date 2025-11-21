@@ -1,6 +1,6 @@
 <?php
 require_once 'db-connect.php';
-require_once '../customer_function/review_submit.php';
+require_once 'customer_function/review_submit.php';
 
 $pdo = new PDO($connect, USER, PASS);
 ?>
