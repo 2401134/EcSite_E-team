@@ -79,11 +79,11 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <!-- 購入ボタン -->
                         <div class="column is-narrow">
-                            <a href="purchase.php?book_id=<?= $book['book_id'] ?>" class="button is-primary">
+                            <a href="customer_function/cart_add.php?book_id=<?= $book['book_id'] ?>" class="button is-primary">
                                 <span class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </span>
-                                <span>購入する</span>
+                                <span>カートに追加</span>
                             </a>
                         </div>
                     </div>
