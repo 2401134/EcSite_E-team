@@ -23,12 +23,12 @@ if (!empty($user_address) && !empty($_POST['user_password'])) {
     try{$sql = $pdo->prepare('SELECT * FROM users WHERE user_address = ?');
         $sql->execute([$user_address]);
         if ($sql->fetch()) {
-            //$_SESSION['alert'] = "このメールアドレスは既に登録されています。";
-            header("Location: register-input.php");
+            $_SESSION['alert_msg'] = "登録が完了しました。";
+            header("Location: login-input.php");
             exit;
         }
     }catch(PDOException $e){
-        //$_SESSION['alert'] = $e;
+        $_SESSION['alert'] = $e;
         header("Location: register-input.php");
         exit;
     }
@@ -54,11 +54,12 @@ if (!empty($user_address) && !empty($_POST['user_password'])) {
     // セッションに保存
     $_SESSION['user_id'] = $user_id;
 
+    $_SESSION['alert_msg'] = "登録が完了しました。";
     header("Location: login-input.php");
     exit;
 
 } else {
-    //$_SESSION['alert'] = "入力してください。";
+    $_SESSION['alert_msg'] = "登録できませんでした。";
     header("Location: register-input.php");
     exit;
 }

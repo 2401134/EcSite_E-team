@@ -5,7 +5,7 @@ require 'db-connect.php';
 // book_id 取得チェック
 if (!isset($_GET['book_id'])) {
     echo '<script>
-        alert("不正なアクセスです");
+        http_response_code(404);
         history.back();
         </script>';
     exit;
@@ -15,9 +15,9 @@ $book_id = (int)$_GET['book_id'];
 
 // ▼ ログインしていない場合
 if (!isset($_SESSION['user_id'])) {
+    $_SESSION['alert_msg'] = "ログインしてください";
     echo "<script>
-            alert('ログインしてください');
-            history.back();   // 元の画面へ戻る
+            window.location.href = '../tryread.php';   // 元の画面へ戻る
           </script>";
     exit;
 }
@@ -32,10 +32,11 @@ try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$user_id, $book_id]);
 
-    // カートページへ
-    echo '<script>
-        history.back();
-        </script>';
+    // 試し読みへ
+    $_SESSION['alert_msg'] = "カートに追加しました";
+    echo "<script>
+        window.location.href = '../tryread.php';
+        </script>";
     exit;
 
 } catch (PDOException $e) {

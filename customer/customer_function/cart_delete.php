@@ -4,7 +4,7 @@ session_start();
 
 if (!isset($_POST['cart_id'])) {
     echo '<script>
-        alert("不正なアクセスです");
+        http_response_code(404);
         history.back();
         </script>';
     exit;
@@ -20,10 +20,10 @@ try {
     $sql->execute([$cart_id]);
 
     // JavaScript でアラートを出して cart.php に戻る
+    $_SESSION['alert_msg'] = "削除しました。";
     echo "
     <script>
-        alert('削除しました');
-        history.back();
+        window.location.href = '../cart.php';
     </script>
     ";
     exit;

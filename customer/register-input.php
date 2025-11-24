@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if (!empty($_SESSION['alert_msg'])) {
+    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -71,15 +79,21 @@
   </style>
 </head>
 <body>
-  <img src="../image/booknest.png" alt="サイトロゴ">
+  <img src="logo.png" alt="サイトロゴ">
 
+  <?php
+  if (isset($_SESSION["alert"])) {
+      $message = $_SESSION["alert"];
+      unset($_SESSION["alert"]);
+  }
+  ?>
   <div class="register-container">
-    <form action="register.php" method="post">
+    <form action="register-output.php" method="post">
       <label for="email">メールアドレス</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="user_address" required>
 
       <label for="password">パスワード</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" id="password" name="user_password" required>
 
       <button type="submit">新規登録</button>
     </form>

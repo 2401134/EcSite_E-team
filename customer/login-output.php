@@ -12,13 +12,23 @@ if (!empty($user_address) && !empty($user_password)) {
         $sql->execute([$user_address]);
         $user = $sql->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        header("Location: login-input.php");
+        $_SESSION['alert_msg'] = $e;
+        echo "
+            <script>
+            window.location.href = 'login-input.php';
+            </script>
+            ";
         exit;
     }
 
     if ($user) {
         if($user['user_status'] === 1){
-            header("Location: login-input.php");
+            $_SESSION['alert_msg'] = "メールアドレスかパスワードが違います。";
+            echo "
+            <script>
+            window.location.href = 'login-input.php';
+            </script>
+            ";
             exit;
         }
         // ソルト取得
@@ -28,17 +38,32 @@ if (!empty($user_address) && !empty($user_password)) {
 
         if ($input_hashed === $user['user_password']) {
             $_SESSION['user_id'] = $user['user_id'];
-            header("Location: home.php");
+            header("Location: customer_home.php");
             exit;
         } else {
-            header("Location: login-input.php");
+            $_SESSION['alert_msg'] = "メールアドレスかパスワードが違います。";
+            echo "
+            <script>
+            window.location.href = 'login-input.php';
+            </script>
+            ";
             exit;
         }
     } else {
-        header("Location: login-input.php");
+        $_SESSION['alert_msg'] = "メールアドレスかパスワードが違います。";
+        echo "
+            <script>
+            window.location.href = 'login-input.php';
+            </script>
+            ";
         exit;
     }
 } else {
-    header("Location: login-input.php");
+    $_SESSION['alert_msg'] = "入力してください。";
+    echo "
+        <script>
+        window.location.href = 'login-input.php';
+        </script>
+        ";
     exit;
 }
