@@ -39,7 +39,7 @@
         <span>マイページ</span>
       </a>
       
-      <a href="login.php" class="button is-danger">
+      <a href="login-input.php" class="button is-danger">
         <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
         <span>ログイン</span>
       </a>

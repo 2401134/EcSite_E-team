@@ -12,12 +12,15 @@ if (!empty($user_address) && !empty($user_password)) {
         $sql->execute([$user_address]);
         $user = $sql->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        $_SESSION['alert'] = "データベースエラー：" . $e->getMessage();
         header("Location: login-input.php");
         exit;
     }
 
     if ($user) {
+        if($user['user_status'] === 1){
+            header("Location: login-input.php");
+            exit;
+        }
         // ソルト取得
         $salt = $user['user_salt'];
         // 入力パス＋ソルトをハッシュ
@@ -25,20 +28,17 @@ if (!empty($user_address) && !empty($user_password)) {
 
         if ($input_hashed === $user['user_password']) {
             $_SESSION['user_id'] = $user['user_id'];
-            header("Location: customer_home.php");
+            header("Location: home.php");
             exit;
         } else {
-            //$_SESSION['alert'] = "パスワードが違います。";
             header("Location: login-input.php");
             exit;
         }
     } else {
-        //$_SESSION['alert'] = "メールアドレスが登録されていません。";
         header("Location: login-input.php");
         exit;
     }
 } else {
-    //$_SESSION['alert'] = "メールアドレスとパスワードを入力してください。";
     header("Location: login-input.php");
     exit;
 }

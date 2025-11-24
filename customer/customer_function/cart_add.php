@@ -4,7 +4,10 @@ require 'db-connect.php';
 
 // book_id 取得チェック
 if (!isset($_GET['book_id'])) {
-    echo "商品が指定されていません。";
+    echo '<script>
+        alert("不正なアクセスです");
+        history.back();
+        </script>';
     exit;
 }
 
@@ -30,7 +33,9 @@ try {
     $stmt->execute([$user_id, $book_id]);
 
     // カートページへ
-    header("Location: cart.php");
+    echo '<script>
+        history.back();
+        </script>';
     exit;
 
 } catch (PDOException $e) {

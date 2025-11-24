@@ -9,10 +9,14 @@ $sql->execute([$book_id]);
 $book = $sql->fetch();
 
 if (!$book) {
-    exit("本が見つかりません");
+    echo '<script>
+        alert("本が見つかりません");
+        history.back();
+        </script>';
+    exit;
 }
 
-$sample_pdf = $book['sample'];
+$sample_pdf = '../' . $book['sample'];
 
 header("Location: $sample_pdf");
 exit;

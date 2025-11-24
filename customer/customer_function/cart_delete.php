@@ -3,7 +3,11 @@ require 'db-connect.php';
 session_start();
 
 if (!isset($_POST['cart_id'])) {
-    exit("不正なアクセスです。");
+    echo '<script>
+        alert("不正なアクセスです");
+        history.back();
+        </script>';
+    exit;
 }
 
 $cart_id = $_POST['cart_id'];
@@ -19,7 +23,7 @@ try {
     echo "
     <script>
         alert('削除しました');
-        window.location.href = '../cart.php';
+        history.back();
     </script>
     ";
     exit;

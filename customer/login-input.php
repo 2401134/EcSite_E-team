@@ -12,12 +12,11 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>BOOK NEST ログイン</title>
-
 </head>
 <body>
 
     <div style="text-align: center;">
-        <img src="../image/booknest.png" width="100px" height="100px" alt="books">    
+        <img src="../images/booknest.png" alt="booknest" width="150px" height="150px">    
     </div>
 
     <form action="login-output.php" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
@@ -28,12 +27,12 @@ session_start();
         <label for="password">パスワード</label><br>
         <input type="password" id="password" name="user_password" style="width: 100%; padding: 8px; margin-bottom: 20px; border-radius: 5px;"><br>
         
-        <button type="submit"  style="width: 100%; padding: 10px; background-color: #444; color: white; border: none; cursor: pointer; border-radius: 5px;">
+        <button type="submit" style="width: 100%; padding: 10px; background-color: #444; color: white; border: none; cursor: pointer; border-radius: 5px;">
             ログイン
         </button>
         
         <div style="text-align: center; margin-top: 15px;">
-            <a href="risetto.php">パスワードを忘れた場合</a>
+            <a href="#">パスワードを忘れた場合</a>
         </div>
         
     </form>

@@ -77,7 +77,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </a>
                         </div>
 
-                        <!-- 購入ボタン -->
+                        <!-- カートボタン -->
                         <div class="column is-narrow">
                             <a href="customer_function/cart_add.php?book_id=<?= $book['book_id'] ?>" class="button is-primary">
                                 <span class="icon">
