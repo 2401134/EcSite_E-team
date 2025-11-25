@@ -87,7 +87,7 @@
 <body>
   <div class="container">
     <div class="logo">
-      <img src="images/logo.png" alt="Book Nest ロゴ">
+      <img src="../../image/booknest.png" alt="Book Nest ロゴ">
     </div>
 
     <form class="form-box" action="insert-admin.php" method="post">
