@@ -40,7 +40,7 @@ require 'customer_function/customer_home_func.php';
 
               <div class="level-right">
                 <!-- 🔹お気に入り登録フォーム -->
-                <form action="favarit.php.php" method="POST" style="display:inline;">
+                <form action="customer_function/favarit.php" method="POST" style="display:inline;">
                   <input type="hidden" name="book_id" value="<?= $book_id ?>">
                   <button type="submit" class="button is-white is-rounded" title="お気に入り登録">
                     <span class="icon">

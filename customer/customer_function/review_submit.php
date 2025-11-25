@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../db/db-connect.php';
+require_once 'db-connect.php';
 
 // 仮ユーザー
 $user_id = 1;

@@ -3,7 +3,7 @@
 // セッション開始 & DB接続
 // -------------------------
 session_start();
-require '../db/db-connect.php';
+require 'db-connect.php';
 
 $pdo = new PDO($connect, USER, PASS);
 $user_id = $_SESSION['user_id'] ?? null;
