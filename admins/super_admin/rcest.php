@@ -83,6 +83,11 @@
       background-color: #000;
     }
   </style>
+
+  <!-- Bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <div class="container">
@@ -107,6 +112,14 @@
 
       <button type="submit">登録</button>
     </form>
+
+    <div class="has-text-right mt-5 mb-5">
+    <a href="super_admin_home.php" class="button is-black">
+    <span class="icon"><i class="fas fa-home"></i></span>
+    <span>ホームに戻る</span>
+    </a>
   </div>
+  </div>
+
 </body>
 </html>
