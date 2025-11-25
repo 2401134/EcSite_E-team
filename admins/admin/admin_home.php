@@ -12,7 +12,7 @@
   <?php require 'header.php'?>
     <?php require 'menu.php'?>
     <h1 class="has-text-right subtitle">
-        <a href="super_admin_home.php">総合管理者ホームへ
+        <a href="../super_admin/super_admin_home.php">総合管理者ホームへ
             <i class="fas fa-external-link-alt"></i>
         </a>
     </h1>
