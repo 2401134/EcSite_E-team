@@ -40,7 +40,7 @@
       <div class="book-buttons has-text-right">
 
         <!-- 書籍を追加 -->
-        <form action="book_add.php" method="post">
+        <form action="add_book.php" method="post">
           <button type="submit" class="button is-light is-rounded is-large">
             <span class="icon"><i class="fas fa-plus"></i></span>
           </button>
@@ -48,7 +48,7 @@
         </form>
 
         <!-- 書籍情報を編集 -->
-        <form action="book_edit.php" method="post">
+        <form action="edit_book.php" method="post">
           <button type="submit" class="button is-light is-rounded is-large">
             <span class="icon"><i class="fas fa-edit"></i></span>
           </button>
@@ -87,7 +87,7 @@
 
     <!--ホームに戻る-->
     <div class="has-text-right mt-5">
-      <form action="admin_home.php" method="POST">
+      <form action="super_admin_home.php" method="POST">
         <button class="button is-dark">
           <span class="icon"><i class="fas fa-home"></i></span>
           <span>ホームに戻る</span>

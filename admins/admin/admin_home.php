@@ -58,11 +58,11 @@
 <section class="section pt-0">
   <div class="container">
     <div class="buttons">
-      <form action="logout.php" method="POST" style="display: inline-block;margin-right: 750px;">
+      <form action="Alogout.php" method="POST" style="display: inline-block;margin-right: 750px;">
         <button class="button is-danger is-medium is-right">ログアウト</button>
       </form>
 
-       <form action="log_manage.php" method="POST" style="display: inline-block;"> 
+      <form action="log_manage.php" method="POST" style="display: inline-block;"> 
         <button class="button is-medium is-left">ログを表示</button>
       </form>
     </div>
