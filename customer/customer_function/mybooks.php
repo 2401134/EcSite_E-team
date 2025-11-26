@@ -5,7 +5,7 @@ require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // 🔹ログインユーザーID
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = $_SESSION['user_id'] ?? null;
 
 // 🔹JOIN で購入書籍一覧を取得
 $sql = "SELECT 

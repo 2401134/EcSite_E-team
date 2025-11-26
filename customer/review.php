@@ -40,7 +40,19 @@ require 'customer_function/review1_function.php';
     <div class="container">
       <h1 class="title has-text-left">この作品のレビュー</h1>
       <div class="has-text-left mb-4">
-           <!--投稿可能-->
+          <?php if(!$user_id){ ?>
+             <button class="button is-dark is-medium" disabled>
+          <span class="icon"><i class="fas fa-lock"></i></span>
+          <span>ログインしてください</span>
+        </button>
+
+      <?php }elseif (!$is_purchased){ ?>
+        <button class="button is-dark is-medium" disabled>
+          <span class="icon"><i class="fas fa-ban"></i></span>
+          <span>購入者のみレビュー可能</span>
+        </button>
+
+      <?php }else{ ?>
 
       <!-- レビューを書くボタン -->
       <div class="has-text-left mb-4">
@@ -51,10 +63,11 @@ require 'customer_function/review1_function.php';
             <span>レビューを書く</span>
           </button>
         </form>
+        <?php } ?>
       </div>
 
       <!-- 🔹 レビュー一覧表示 -->
-      <?php if (!empty($reviews)): ?>
+      <?php if (!empty($reviews)){ ?>
         <?php foreach ($reviews as $review){ ?>
           <div class="box review-card">
             
@@ -68,16 +81,18 @@ require 'customer_function/review1_function.php';
               
               <!-- 星評価 -->
                <div class="review-stars">
-                  <?php for ($i = 1; $i <= 5; $i++): ?>
+                  <?php for ($i = 1; $i <= 5; $i++){ ?>
                     <span class="icon <?= ($i <= (int)$review['review_rank']) ? 'has-text-dark' : 'has-text-grey-light' ?>">
                       <i class="fas fa-star"></i>
                     </span>
-                  <?php endfor; ?>
+                  <?php } ?>
                </div>
               </div>
 
             <!-- コメント本文 -->
-            <p class="mt-2 text" style="text-align: center;"><?= nl2br(htmlspecialchars($review['comment_text'])) ?></p>
+            <p class="mt-2 text" style="text-align: center;">
+              <?= nl2br(htmlspecialchars($review['comment_text'])) ?>
+            </p>
 
             <!-- 通報ボタン -->
             <div class="review-report">
@@ -90,9 +105,10 @@ require 'customer_function/review1_function.php';
 
           </div>
         <?php } ?>
-      <?php else: ?>
+
+      <?php }else{ ?>
         <p>まだレビューはありません。</p>
-      <?php endif; ?>
+      <?php } ?>
 
       <!-- ホームに戻る -->
       <div class="has-text-right mt-5">
