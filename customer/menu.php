@@ -29,7 +29,7 @@
         <span>検索</span>
       </a>
 
-      <a href="favorite_add.php" class="button is-light is-rounded">
+      <a href="favorite-add.php" class="button is-light is-rounded">
         <span class="icon"><i class="fas fa-heart"></i></span>
         <span>お気に入り</span>
       </a>
