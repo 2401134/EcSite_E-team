@@ -6,6 +6,15 @@ $pdo = new PDO($connect, USER, PASS);
 $user_id = $_SESSION['user_id'] ?? null;
 $book_id = $_POST['book_id'] ?? 0;
 
+if (!$user_id) {
+    // ゲストの場合はアラートを出してホームに戻す
+    echo "<script>
+        alert('ゲストユーザーはお気に入り登録できません。ログインしてください。');
+        window.location.href = '../customer_home.php';
+    </script>";
+    exit; // これ以上処理しない
+}
+
 if($book_id > 0){
     $stmt = $pdo->prepare("SELECT favorite_id, favorite_status FROM favorites WHERE user_id=? AND book_id=?");
     $stmt->execute([$user_id, $book_id]);
