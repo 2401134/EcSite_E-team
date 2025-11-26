@@ -1,21 +1,13 @@
 <?php
-// -------------------------
 // セッション開始 & DB接続
-// -------------------------
 session_start();
 require 'db-connect.php';
 
 $pdo = new PDO($connect, USER, PASS);
 $user_id = $_SESSION['user_id'] ?? null;
 $book_id = $_GET['book_id'] ?? 0;
-
-// -------------------------
 // 関数定義
-// -------------------------
-
-/**
- * 指定ユーザーが指定の書籍を購入しているかチェック
- */
+//指定ユーザーが指定の書籍を購入しているかチェック
 function checkPurchased($pdo, $user_id, $book_id) {
     $sql = "SELECT 1 FROM purchases WHERE user_id = ? AND book_id = ? LIMIT 1";
     $stmt = $pdo->prepare($sql);
@@ -38,9 +30,7 @@ function getReviews($pdo, $book_id) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// -------------------------
 // データ取得
-// -------------------------
 $reviews = getReviews($pdo, $book_id);
 $is_purchased = $user_id ? checkPurchased($pdo, $user_id, $book_id ): false;
 ?>

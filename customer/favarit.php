@@ -1,9 +1,9 @@
 <?php
 session_start();
-require '../db/db-connect.php';
+require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = $_SESSION['user_id'] ?? null;
 $book_id = $_POST['book_id'] ?? 0;
 
 if($book_id > 0){

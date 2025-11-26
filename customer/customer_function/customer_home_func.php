@@ -9,8 +9,7 @@
     function getBooks($pdo){
     $sql = "SELECT book_id, title, synopsis, sample FROM books";
     $stmt = $pdo->query($sql);
-    $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
-     return $books;
+     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // 🔹 お気に入り一覧取得
@@ -18,8 +17,7 @@
     $fav_sql = "SELECT book_id FROM favorites WHERE user_id = ?";
     $fav_stmt = $pdo->prepare($fav_sql);
     $fav_stmt->execute([$user_id]);
-    $favorites = $fav_stmt->fetchAll(PDO::FETCH_COLUMN);
-     return $favorites;
+      return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
     }
     $books=getBooks($pdo);
     $favorites=getFavorites($pdo,$user_id);
