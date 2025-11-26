@@ -20,7 +20,7 @@
     $fav_sql = "SELECT book_id FROM favorites WHERE user_id = ?";
     $fav_stmt = $pdo->prepare($fav_sql);
     $fav_stmt->execute([$user_id]);
-      return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+      return array_map('intval', $fav_stmt->fetchAll(PDO::FETCH_COLUMN));
     }
     $books=getBooks($pdo);
     $favorites=getFavorites($pdo,$user_id);
