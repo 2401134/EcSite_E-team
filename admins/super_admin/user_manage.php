@@ -13,8 +13,8 @@
     </style>
 </head>
 <body>
-    <?php require 'header.php'; ?>
-    <?php require 'menu.php'; ?>
+    <?php require 'header.php'?>
+    <?php require 'menu.php'?>
 
     <section class="section">
         <div class="container">
@@ -48,22 +48,13 @@
                         </button>
                     </form>
 
-                    <form action="user_review_manage.php" method="post" class="mr-4">
+                    <form action="user_review_manage.php" method="post">
                         <button class="button is-normal is-light">
                             <span class="icon is-normal"><i class="fas fa-comment-dots"></i></span>
                             <span>レビュー履歴</span>
                         </button>
                     </form>
 
-                    <!-- 垢banボタン -->
-                    <form action = "#" method="post">
-                        <button class="button is-danger is-light is-rounded">
-                            <span class="icon">
-                                <i class="fas fa-trash"></i>
-                            </span>
-                            <span>このユーザーを削除する</span>
-                        </button>
-                    </form>
                 </div>
 
             </div>
@@ -102,29 +93,20 @@
                         </button>
                     </form>
 
-                    <form action="user_review_manage.php" method="post" class="mr-4">
+                    <form action="user_review_manage.php" method="post">
                         <button class="button is-normal is-light">
                             <span class="icon is-normal"><i class="fas fa-comment-dots"></i></span>
                             <span>レビュー履歴</span>
                         </button>
                     </form>
 
-                    <!-- 垢banボタン -->
-                    <form action = "#" method="post">
-                        <button class="button is-danger is-light is-rounded">
-                            <span class="icon">
-                                <i class="fas fa-trash"></i>
-                            </span>
-                            <span>このユーザーを削除する</span>
-                        </button>
-                    </form>
                 </div>
 
             </div>
 
             <!-- ホームに戻る -->
             <div class="has-text-right mt-5">
-                <a href="super_admin_home.php" class="button is-black">
+                <a href="admin_home.php" class="button is-black">
                 <span class="icon"><i class="fas fa-home"></i></span>
                 <span>ホームに戻る</span>
                 </a>

@@ -17,7 +17,7 @@
         
         <!-- 書籍管理 -->
         <div class="column is-one-four">
-          <form action="../admin/book_list.php" method="POST">
+          <form action="book_list.php" method="POST">
             <button class="button is-light is-large is-rounded"style="height: 120px; width: 120px; ">
               <i class="fas fa-book fa-2x"></i>
             </button>
@@ -27,7 +27,7 @@
 
         <!-- レビュー管理 -->
         <div class="column is-one-four">
-          <form action="../admin/review_manage.php" method="POST">
+          <form action="review_manage.php" method="POST">
             <button class="button is-light is-large is-rounded" style="height: 120px; width: 120px;">
               <i class="fas fa-comment-dots fa-2x"></i>
             </button>
