@@ -14,6 +14,9 @@
 
     // 🔹 お気に入り一覧取得
     function getFavorites($pdo,$user_id){
+        if ($user_id === null) {
+        return [];
+    }
     $fav_sql = "SELECT book_id FROM favorites WHERE user_id = ?";
     $fav_stmt = $pdo->prepare($fav_sql);
     $fav_stmt->execute([$user_id]);
