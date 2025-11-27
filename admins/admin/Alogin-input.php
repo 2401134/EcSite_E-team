@@ -1,12 +1,3 @@
-<?php
-session_start();
-
-if (!empty($_SESSION['alert_msg'])) {
-    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
-    unset($_SESSION['alert_msg']); // 1回だけ出す
-}
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -19,7 +10,7 @@ if (!empty($_SESSION['alert_msg'])) {
         <img src="img/booknest.png" alt="books">    
     </div>
     
-    <form action="Alogin-output.php" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
+    <form action="#" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
         
         <label for="id">社員ID</label><br>
         <input type="text" id="id" name="admin_id" style="width: 100%; padding: 8px; margin-bottom: 15px;border-radius: 5px;"><br>

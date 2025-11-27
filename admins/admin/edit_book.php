@@ -118,20 +118,18 @@ if (!$book) {
                     <label class="label">新しい表紙画像（変更する場合のみ）</label>
                     <div class="file has-name is-fullwidth">
                         <label class="file-label">
-                            <label class="file-label">
-                            <input class="file-input"
-                                type="file"
-                                id="book_image_input"
-                                name="book_image"
-                                accept=".png"
-                                onchange="showFileName(this, 'book_image_name')">
-                        <span class="file-cta">
-                            <span class="file-icon"><i class="fas fa-upload"></i></span>
-                            <span class="file-label">ファイルを選択</span>
-                        </span>
-                        <span id="book_image_name" class="file-name" aria-live="polite">
+                            <input class="file-input" type="file" name="book_image" accept="image/*">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">ファイルを選択</span>
+                            </span>
+
+                            <span id="book_image_name" class="file-name" aria-live="polite">
                             選択されていません
-                        </span>
+                            </span>
+                        </label>
                     </div>
                 </div>
 
@@ -150,20 +148,15 @@ if (!$book) {
                     <label class="label">新しいサンプルデータ（変更する場合のみ）</label>
                     <div class="file has-name is-fullwidth">
                         <label class="file-label">
-                            <input class="file-input"
-                                type="file"
-                                id="book_sample_input"
-                                name="book_sample"
-                                accept=".pdf"
-                                onchange="showFileName(this, 'book_sample_name')"
-                            >
-                        <span class="file-cta">
-                            <span class="file-icon"><i class="fas fa-upload"></i></span>
-                            <span class="file-label">ファイルを選択</span>
-                        </span>
-                        <span id="book_sample_name" class="file-name" aria-live="polite">
+                            <input class="file-input" type="file" name="sample">
+                            <span class="file-cta">
+                                <span class="file-icon"><i class="fas fa-upload"></i></span>
+                                <span class="file-label">ファイルを選択</span>
+                            </span>
+
+                            <span id="book_image_name" class="file-name" aria-live="polite">
                             選択されていません
-                        </span>
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -182,20 +175,15 @@ if (!$book) {
                     <label class="label">新しい電子書籍データ（変更する場合のみ）</label>
                     <div class="file has-name is-fullwidth">
                         <label class="file-label">
-                            <input class="file-input"
-                                type="file"
-                                id="book_e-book_input"
-                                name="book_e-book"
-                                accept=".pdf"
-                                onchange="showFileName(this, 'book_e-book_name')"
-                            >
-                        <span class="file-cta">
-                            <span class="file-icon"><i class="fas fa-upload"></i></span>
-                            <span class="file-label">ファイルを選択</span>
-                        </span>
-                        <span id="book_e-book_name" class="file-name" aria-live="polite">
+                            <input class="file-input" type="file" name="e_book">
+                            <span class="file-cta">
+                                <span class="file-icon"><i class="fas fa-upload"></i></span>
+                                <span class="file-label">ファイルを選択</span>
+                            </span>
+
+                            <span id="book_image_name" class="file-name" aria-live="polite">
                             選択されていません
-                        </span>
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -231,6 +219,16 @@ if (!$book) {
                 <br>
 
             </form>
+
+            <!--ホームに戻る-->
+            <div class="has-text-right mt-5">
+            <form action="admin_home.php" method="POST">
+                <button class="button is-dark">
+                <span class="icon"><i class="fas fa-home"></i></span>
+                <span>ホームに戻る</span>
+                </button> 
+            </form>  
+            </div>
         </div>
 
     </section>
