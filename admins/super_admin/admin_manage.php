@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if (!empty($_SESSION['alert_msg'])) {
+    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+}
+?>
+
 <?php
 require 'db-connect.php';
 
