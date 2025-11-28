@@ -70,8 +70,8 @@
                             <tb><?= htmlspecialchars($log['target']) ?></td>
                             <td><?= htmlspecialchars($log['action']) ?></td>
                         </tr>
-                        <?php } ?>
-                    </tbody>                    
+                    </tbody> 
+                    <?php } ?>                   
                 </table>
             </div>
 
