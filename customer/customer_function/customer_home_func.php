@@ -7,18 +7,20 @@
 
     // 🔹 書籍データ取得
     function getBooks($pdo){
-    $sql = "SELECT book_id, title, synopsis, sample ,price FROM books";
+    $sql = "SELECT book_id, title, synopsis, book_image FROM books";
     $stmt = $pdo->query($sql);
-     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+     return $books;
     }
 
     // 🔹 お気に入り一覧取得
-    function getFavorites($pdo, $user_id) {
-    $sql = "SELECT book_id FROM favorites WHERE user_id = ? AND favorite_status = 0";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$user_id]);
-    return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
-}
+    function getFavorites($pdo,$user_id){
+    $fav_sql = "SELECT book_id FROM favorites WHERE user_id = ?";
+    $fav_stmt = $pdo->prepare($fav_sql);
+    $fav_stmt->execute([$user_id]);
+    $favorites = $fav_stmt->fetchAll(PDO::FETCH_COLUMN);
+     return $favorites;
+    }
     $books=getBooks($pdo);
     $favorites=getFavorites($pdo,$user_id);
 ?>

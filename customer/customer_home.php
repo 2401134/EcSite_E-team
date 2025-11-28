@@ -24,8 +24,13 @@ require 'customer_function/customer_home_func.php';
           $book_id = (int)$row['book_id'];
           $title = $row['title'];
           $synopsis =$row['synopsis'];
-          $image_path = !empty($row['book_image']) ? $row['book_image']: 'images/sample.jpg';
-          $is_fav = in_array($book_id, $favorites,true);
+          if (empty($row['book_image'])) {
+            $image_path = "";   // 空白を入れる
+          } else {
+            $image_path = $row['book_image'];  // 画像パスを入れる
+          }
+
+          $is_fav = in_array($book_id, $favorites);
         ?>
         <div class="column is-one-third">
           <div class="card">
@@ -40,7 +45,7 @@ require 'customer_function/customer_home_func.php';
 
               <div class="level-right">
                 <!-- 🔹お気に入り登録フォーム -->
-                <form action="customer_function/favarit.php" method="POST" style="display:inline;">
+                <form action="favarit.php.php" method="POST" style="display:inline;">
                   <input type="hidden" name="book_id" value="<?= $book_id ?>">
                   <button type="submit" class="button is-white is-rounded" title="お気に入り登録">
                     <span class="icon">
