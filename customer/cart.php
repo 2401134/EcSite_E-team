@@ -4,8 +4,9 @@ session_start();
 
 // ログインしていない場合はログイン画面へ
 if (!isset($_SESSION['user_id'])) {
-    alert('ログインしてください');
-    history.back();
+    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+    echo "<script>history.back()</script>";
     exit();
 }
 
