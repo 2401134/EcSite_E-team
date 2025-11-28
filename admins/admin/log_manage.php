@@ -62,16 +62,16 @@
                             <th>操作内容</th>
                         </tr>
                     </thead>
-                    <?php foreach($logs as $log){ ?>
                     <tbody>
+                        <?php foreach($logs as $log){ ?>
                         <tr>
                             <td><?= htmlspecialchars(date('Y-m-d H:i', strtotime($log['log_date']))) ?></td>
                             <td><?= htmlspecialchars($log['user_name']) ?></td>
                             <tb><?= htmlspecialchars($log['target']) ?></td>
                             <td><?= htmlspecialchars($log['action']) ?></td>
                         </tr>
-                    </tbody> 
-                    <?php } ?>                   
+                        <?php } ?>
+                    </tbody>                 
                 </table>
             </div>
 
