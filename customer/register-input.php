@@ -99,7 +99,7 @@ if (!empty($_SESSION['alert_msg'])) {
     </form>
 
     <div class="login-link">
-      <p><a href="login.html">ログイン画面へ</a></p>
+      <p><a href="login-input.php">ログイン画面へ</a></p>
     </div>
   </div>
 </body>
