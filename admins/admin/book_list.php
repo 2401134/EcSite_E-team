@@ -36,34 +36,6 @@
     <div class="container">
       <h1 class="title has-text-left">書籍管理</h1>
 
-      <!-- ✅ 書籍操作ボタン -->
-      <div class="book-buttons has-text-right">
-
-        <!-- 書籍を追加 -->
-        <form action="add_book.php" method="post">
-          <button type="submit" class="button is-light is-rounded is-large">
-            <span class="icon"><i class="fas fa-plus"></i></span>
-          </button>
-          <p>書籍を追加</p>
-        </form>
-
-        <!-- 書籍情報を編集 -->
-        <form action="edit_book.php" method="post">
-          <button type="submit" class="button is-light is-rounded is-large">
-            <span class="icon"><i class="fas fa-edit"></i></span>
-          </button>
-          <p>書籍情報を編集</p>
-        </form>
-
-        <!-- 書籍を削除 -->
-        <form action="book_delete.php" method="post">
-          <button type="submit" class="button is-light is-rounded is-large">
-            <span class="icon"><i class="fas fa-trash"></i></span>
-          </button>
-          <p>書籍を削除</p>
-        </form>
-
-      </div>
       <!-- 書籍表示ボックス -->
       <div class="box mt-5">
         <div class="columns is-vcentered">
@@ -72,6 +44,8 @@
             <figure class="image is-3by4" style="width: 80px; border: 1px solid #4a4a4a;">
               <img src="images/sample.jpg" alt="小説の表紙">
             </figure>
+
+            
           </div>
 
           <!-- 価格表示 -->
@@ -79,6 +53,35 @@
             <div class="is-flex is-align-items-center mb-2">
               <div class="has-text-weight-bold mr-2">〇〇〇〇円</div>
             </div>
+          </div>
+
+          <!-- ✅ 書籍操作ボタン -->
+          <div class="column book-buttons has-text-right">
+
+            <!-- 書籍を追加 -->
+            <form action="add_book.php" method="post">
+              <button type="submit" class="button is-light is-rounded is-large">
+                <span class="icon"><i class="fas fa-plus"></i></span>
+              </button>
+              <p>書籍を追加</p>
+            </form>
+
+            <!-- 書籍情報を編集 -->
+            <form action="edit_book.php" method="post">
+              <button type="submit" class="button is-light is-rounded is-large">
+                <span class="icon"><i class="fas fa-edit"></i></span>
+              </button>
+              <p>書籍情報を編集</p>
+            </form>
+
+            <!-- 書籍を削除 -->
+            <form action="book_delete.php" method="post">
+              <button type="submit" class="button is-light is-rounded is-large">
+                <span class="icon"><i class="fas fa-trash"></i></span>
+              </button>
+              <p>書籍を削除</p>
+            </form>
+
           </div>
         </div>
       </div>
