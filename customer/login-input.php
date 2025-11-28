@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-//if (isset($_SESSION["alert"])) {
-//    $message = $_SESSION["alert"];
-//    unset($_SESSION["alert"]);
-//}
+if (isset($_SESSION["alert"])) {
+    $message = $_SESSION["alert"];
+    unset($_SESSION["alert"]);
+}
 ?>
 
 <!DOCTYPE html>

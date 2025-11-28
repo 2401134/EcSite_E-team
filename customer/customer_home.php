@@ -24,7 +24,7 @@ require 'customer_function/customer_home_func.php';
           $book_id = (int)$row['book_id'];
           $title = $row['title'];
           $synopsis =$row['synopsis'];
-          $image_path = !empty($row['sample']) ? $row['sample']: 'images/sample.jpg';
+          $image_path = !empty($row['book_image']) ? $row['book_image']: 'images/sample.jpg';
           $is_fav = in_array($book_id, $favorites,true);
         ?>
         <div class="column is-one-third">
