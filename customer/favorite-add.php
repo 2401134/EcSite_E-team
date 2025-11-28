@@ -1,6 +1,6 @@
 <?php
 require 'customer_function/favorite_controller.php' ;
-$favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? 1);
+$favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
