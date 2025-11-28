@@ -19,7 +19,9 @@ $favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
     <section class="section">
     <div class="container">
       <h1 class="title has-text-left mb-5">お気に入り</h1>
+      <!--お気に入りがある場合-->
     <?php if (!empty($favorites)){ ?>
+
     <?php foreach ($favorites as $book){ ?>
     <div class="box">
         <div class="columns is-vcentered">
@@ -57,6 +59,9 @@ $favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
         </div>
     </div>
 <?php } ?>
+<!--お気に入りがない場合-->
+<?php }else{ ?>
+    <p>お気に入りはまだ登録されていません</p>
 <?php } ?>
 
 
