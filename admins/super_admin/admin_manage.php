@@ -1,3 +1,12 @@
+<?php
+require 'db-connect.php';
+
+// 管理者一覧を取得
+$pdo = new PDO($connect, USER, PASS);
+$stmt = $pdo->query("SELECT * FROM admins ORDER BY admin_id ASC");
+$admins = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,101 +29,90 @@
         <div class="container">
             <h1 class="title">管理者管理</h1>
 
-            <!-- 新規管理者追加ボタン -->
-            <div class="admin_add">
-                <div class="columns is-flex is-justify-content-flex-end mb-2">
-                    <div class="column is-narrow">
-                        <form action ="rcest.php" method="post">
-                            <button type="submit" class="button is-black is-medium">
-                                <span>新規管理者追加<span>
-                            </button>
+            <div class="container">
+                <!-- 新規管理者追加ボタン -->
+                <div class="admin_add">
+                    <div class="columns is-flex is-justify-content-flex-end mb-2">
+                        <div class="column is-narrow">
+                            <form action="rcest.php" method="post">
+                                <button type="submit" class="button is-black is-medium">
+                                    <span>新規管理者追加</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <?php foreach ($admins as $admin): ?>
+                <div class="box admin-info">
+                    <div class="columns is-vcentered mb-2">
+                        <!-- 管理者アイコン -->
+                        <span class="icon is-large has-text-grey" style="border: 1px solid #4a4a4a; border-radius:45%;padding:2em;">
+                            <i class="fas fa-user fa-2x"></i>
+                        </span>
+
+                        <!-- 管理者名 -->
+                        <div class="column is-narrow">
+                            <strong><?php echo htmlspecialchars($admin['admin_name']); ?></strong>
+                        </div>
+
+                        <!-- 管理者ID -->
+                        <div class="column is-narrow">
+                            <small><?php echo htmlspecialchars($admin['admin_id']); ?></small>
+                        </div>
+
+                        <!-- 社員ID -->
+                        <div class="column is-narrow">
+                            <small>社員ID: <?php echo htmlspecialchars($admin['employee_id']); ?></small>
+                        </div>
+                    </div>
+
+                    <!-- ボタン群 -->
+ 
+                    <div class="history_browse is-flex is-justify-content-flex-end">
+
+                    <!-- super_admin 権限ボタン -->
+                        <form action="super_admin_function/authority_super.php" method="post" class="mr-4">
+                            <input type="hidden" name="admin_id" value="<?php echo $admin['admin_id']; ?>">
+
+                            <?php if ($admin['super_admin'] == 0): ?>
+                                <!-- super_admin = 0 → すでに総合管理者なので「削除」ボタン -->
+                                <button type="submit" class="button is-danger is-light is-rounded">
+                                    <span class="icon is-normal"><i class="fas fa-trash"></i></span>
+                                    <span>総合管理者権限を削除</span>
+                                </button>
+                            <?php else: ?>
+                                <!-- super_admin = 1 → 総合管理者権限なし → 「付与」ボタン -->
+                                <button type="submit" class="button is-primary is-light is-rounded">
+                                    <span class="icon is-normal"><i class="fas fa-plus"></i></span>
+                                    <span>総合管理者権限を付与</span>
+                                </button>
+                            <?php endif; ?>
                         </form>
+
+
+                        <!-- admin_status 権限ボタン -->
+                        <form action="super_admin_function/authority_admin.php" method="post" class="mr-4">
+                            <input type="hidden" name="admin_id" value="<?php echo $admin['admin_id']; ?>">
+
+                            <?php if ($admin['admin_status'] == 0): ?>
+                                <!-- admin_status = 0 → 管理者権限あり → 「削除」 -->
+                                <button type="submit" class="button is-danger is-light is-rounded">
+                                    <span class="icon is-normal"><i class="fas fa-trash"></i></span>
+                                    <span>管理者権限を削除</span>
+                                </button>
+                            <?php else: ?>
+                                <!-- admin_status = 1 → 権限なし → 「付与」 -->
+                                <button type="submit" class="button is-primary is-light is-rounded">
+                                    <span class="icon is-normal"><i class="fas fa-plus"></i></span>
+                                    <span>管理者権限を付与</span>
+                                </button>
+                            <?php endif; ?>
+                        </form>
+
                     </div>
                 </div>
-            </div>
-
-            <!-- 管理人情報（横並び） -->
-            <div class="box admin-info">
-                <div class="columns is-vcentered mb-2">
-                    <!-- 管理者アイコン -->
-                    <span class="icon is-large has-text-grey" style=" border: 1px solid #4a4a4a; border-radius:45%;padding:2em;">
-                        <i class="fas fa-user fa-2x"></i>
-                    </span>
-                
-                    <!--管理者名、管理者ID-->
-                
-                    <div class="column is-narrow">
-                        <strong>(管理者名)</strong>
-                    </div>
-                
-                    <div class="column is-narrow">
-                        <small>（管理者ID）</small></p>
-                    </div>
-                </div>
-
-                <!-- ボタン群 -->
-                <div class="history_browse is-flex is-justify-content-flex-end">
-                    <form action ="#" method="post" class="mr-4">
-                        <button type="submit" class="button is-primary is-light is-rounded">
-                            <span class="icon is-normal"><i class="fas fa-plus"></i></span>
-                            <span>総合管理者権限を付与</span>
-                        </button>
-                    </form>
-
-                    <form action="#" method="post" class="mr-4">
-                        <button type="submit" class="button is-danger is-light is-rounded">
-                            <span class="icon is-normal"><i class="fas fa-trash"></i></span>
-                            <span>管理者権限を削除</span>
-                        </button>
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <br>
-
-        <div class="container">
-
-          <!-- 管理人情報（横並び） -->
-            <div class="box admin-info">
-                <div class="columns is-vcentered mb-2">
-                    <!-- 管理者アイコン -->
-                    <span class="icon is-large has-text-grey" style=" border: 1px solid #4a4a4a; border-radius:45%;padding:2em;">
-                        <i class="fas fa-user fa-2x"></i>
-                    </span>
-                
-                    <!--管理者名、管理者ID-->
-                
-                    <div class="column is-narrow">
-                        <strong>(管理者名)</strong>
-                    </div>
-                
-                    <div class="column is-narrow">
-                        <small>（管理者ID）</small></p>
-                    </div>
-                </div>
-
-                <!-- ボタン群 -->
-                <div class="history_browse is-flex is-justify-content-flex-end">
-                    <form action ="#" method="post" class="mr-4">
-                        <button type="submit" class="button is-primary is-light is-rounded">
-                            <span class="icon is-normal"><i class="fas fa-plus"></i></span>
-                            <span>総合管理者権限を付与</span>
-                        </button>
-                    </form>
-
-                    <form action="#" method="post" class="mr-4">
-                        <button type="submit" class="button is-danger is-light is-rounded">
-                            <span class="icon is-normal"><i class="fas fa-trash"></i></span>
-                            <span>管理者権限を削除</span>
-                        </button>
-                    </form>
-
-                </div>
-
+                <?php endforeach; ?>
             </div>
 
             <!-- ホームに戻る -->
