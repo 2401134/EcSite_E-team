@@ -12,9 +12,8 @@
     <div class="column">
       <p class="title">ガイドライン</p>
       <ul>
-        <li><a href="#" class="has-text-dark">利用規約</a></li>
-        <li><a href="#" class="has-text-dark">お問い合わせ</a></li>
-        <li><a href="#" class="has-text-dark">特定商取引法表示について</a></li>
+        <li><a href="terms_of_use.php" class="has-text-dark">利用規約</a></li>
+        <li><a href="commercial_transactions.php" class="has-text-dark">特定商取引法表示について</a></li>
         <li><a href="#" class="has-text-dark">お支払方法について</a></li>
         <li><a href="#" class="has-text-dark">プライバシーポリシー</a></li>
       </ul>
