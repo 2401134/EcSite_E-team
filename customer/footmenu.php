@@ -4,7 +4,7 @@
 
     <div class="column is-narrow">
       <figure class="image is-96x96">
-        <a href="customer_home.php"><img src="../image/booknest.png" alt="BookNest ロゴ"></a>
+        <a href="customer_home.php"><img src="../uploads/image/booknest.png" alt="BookNest ロゴ"></a>
       </figure>
     </div>
 

@@ -79,7 +79,7 @@ if (!empty($_SESSION['alert_msg'])) {
   </style>
 </head>
 <body>
-  <img src="../image/booknest.png" alt="サイトロゴ">
+  <img src="../uploads/image/booknest.png" alt="サイトロゴ">
 
   <?php
   if (isset($_SESSION["alert"])) {
