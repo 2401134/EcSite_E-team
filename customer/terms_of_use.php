@@ -3,21 +3,6 @@ session_start();
 require 'db-connect.php';
 ?>
 
-<?php
-if (!empty($_SESSION['alert_msg'])) {
-    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
-    unset($_SESSION['alert_msg']); // 1回だけ出す
-}
-?>
-
-<?php
-// books 全件取得
-$pdo = new PDO($connect, USER, PASS);
-$stmt = $pdo->prepare("SELECT * FROM books ORDER BY book_id ASC");
-$stmt->execute();
-$books = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
