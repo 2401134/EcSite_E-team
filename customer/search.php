@@ -17,7 +17,7 @@ $search_started =
     isset($_GET['title']) ||
     isset($_GET['keyword']);
 
-// ---------- モード切替（ボタン押した時だけ） ----------
+// ---------- モード切替 ----------
 if (isset($_GET['author'])) {
     $mode = 'author';
 } else if (isset($_GET['genre'])) {
@@ -103,7 +103,7 @@ $favorites = [];
           </div>
         <?php endif; ?>
 
-        <!-- 🔍検索バー -->
+        <!-- 検索バー -->
         <div class="columns is-centered mt-5 mb-5">
           <div class="column is-two-thirds">
             <div class="field">
@@ -120,7 +120,7 @@ $favorites = [];
           </div>
         </div>
 
-        <!-- 🔘 ボタン（customer_home の見た目維持） -->
+        <!-- ボタン（customer_home の見た目維持） -->
         <div class="columns is-centered is-multiline">
           <div class="column is-narrow">
           <button class="button is-large <?= $mode === 'title' ? 'is-info' : '' ?>"
@@ -141,7 +141,7 @@ $favorites = [];
         </div>
       </form>
 
-      <!-- 📚 検索結果 -->
+      <!-- 検索結果 -->
       <?php if ($search_started && $error_message === ''): ?>
       <hr>
 
@@ -165,14 +165,14 @@ $favorites = [];
             <div class="column is-one-third">
               <div class="card">
 
-                <!-- 📕画像 -->
+                <!-- 画像 -->
                 <div class="card-image">
                   <figure class="image is-3by4">
                     <img src="<?= $image_path ?>" alt="本の表紙">
                   </figure>
                 </div>
 
-                <!-- 📄 内容 -->
+                <!-- 内容 -->
                 <div class="card-content">
                   <p class="title is-6"><?= htmlspecialchars($title) ?></p>
                   <p class="subtitle is-7"><?= htmlspecialchars($synopsis) ?></p>
@@ -181,8 +181,8 @@ $favorites = [];
 
                   <div class="level-right">
 
-                    <!-- ⭐お気に入り -->
-                    <form action="favarit.php" method="POST" style="display:inline;">
+                    <!-- お気に入り -->
+                    <form action="customer_function/favarit.php" method="POST" style="display:inline;">
                       <input type="hidden" name="book_id" value="<?= $book_id ?>">
                       <button type="submit" class="button is-white is-rounded" title="お気に入り登録">
                         <span class="icon">
@@ -191,7 +191,7 @@ $favorites = [];
                       </button>
                     </form>
 
-                    <!-- 💬レビュー -->
+                    <!-- レビュー -->
                     <form action="review.php" method="GET" style="display:inline;">
                       <input type="hidden" name="book_id" value="<?= $book_id ?>">
                       <button type="submit" class="button is-white is-normal">
