@@ -4,7 +4,7 @@
 
     <div class="column is-narrow">
       <figure class="image is-96x96">
-        <a href="customer_home.php"><img src="../uploads/image/booknest.png" alt="BookNest ロゴ"></a>
+        <a href="customer_home.php"><img src="../image/booknest.png" alt="BookNest ロゴ"></a>
       </figure>
     </div>
 
@@ -14,7 +14,7 @@
       <ul>
         <li><a href="terms_of_use.php" class="has-text-dark">利用規約</a></li>
         <li><a href="commercial_transactions.php" class="has-text-dark">特定商取引法表示について</a></li>
-        <li><a href="#" class="has-text-dark">お支払方法について</a></li>
+        <li><a href="about_paymethods.php" class="has-text-dark">お支払方法について</a></li>
         <li><a href="#" class="has-text-dark">プライバシーポリシー</a></li>
       </ul>
     </div>
