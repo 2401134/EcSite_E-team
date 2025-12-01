@@ -157,23 +157,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     
     <?php if ($error): ?>
-        <p><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
-    <?php elseif ($success): ?>
-        <p><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p>
-    <?php else: ?>
-        <form action="pass-change.php?id=<?= htmlspecialchars($url_token, ENT_QUOTES, 'UTF-8') ?>" class="form-container" method="post">
-            認証コード<br>
-            <input type="text" name="code" required><br>
-                新しいパスワード<br>
-            <input type="password" name="pass" required><br>
-            <button type="submit" class="btn btn-top">
-                パスワード変更
-            </button>
-            <a href="login-input.php" class="btn">
-                ログイン画面へ戻る
-            </a>
-        </form>
+        <script>alert("<?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>");</script>
     <?php endif; ?>
+
+    <?php if ($success): ?>
+        <script>alert("<?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?>");</script>
+    <?php endif; ?>
+
+    <form action="pass-change.php?id=<?= htmlspecialchars($url_token, ENT_QUOTES, 'UTF-8') ?>" class="form-container" method="post">
+        認証コード<br>
+        <input type="text" name="code" required><br>
+            新しいパスワード<br>
+        <input type="password" name="pass" required><br>
+        <button type="submit" class="btn btn-top">
+            パスワード変更
+        </button>
+        <a href="login-input.php" class="btn">
+            ログイン画面へ戻る
+        </a>
+    </form>
 
 </body>
 </html>
