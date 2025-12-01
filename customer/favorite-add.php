@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -37,7 +36,7 @@ $favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
             <!-- 左：表紙画像 -->
             <div class="column is-narrow">
                 <figure class="image is-3by4" style="width: 80px; border: 1px solid #4a4a4a;">
-                    <img src="<?= htmlspecialchars($book['sample'] ?? 'images/sample.jpg') ?>" alt="小説の表紙">
+                    <img src="<?= htmlspecialchars($book['book_image'] ?? 'images/sample.jpg') ?>" alt="小説の表紙">
                 </figure>
             </div>
 
@@ -72,7 +71,6 @@ $favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
                     </button>
                 </form>
             </div>
-
         </div>
     </div>
 <?php } ?>
