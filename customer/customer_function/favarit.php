@@ -13,12 +13,10 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-if (!empty($_POST['book_id'])) {
+if (isset($_POST['book_id'])) {
     $book_id = (int)$_POST['book_id'];
-} elseif (!empty($_SESSION['book_id'])) {
-    $book_id = (int)$_SESSION['book_id'];
 } else {
-    $book_id = null;
+    $book_id = 0;
 }
 
 if($book_id > 0){

@@ -77,22 +77,28 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <!-- 試し読みボタン -->
                         <div class="column is-narrow">
-                            <a href="customer_function/sample_view.php?book_id=<?= $book['book_id'] ?>" target="_blank" class="button is-dark">
-                                <span class="icon">
-                                    <i class="fas fa-book-open"></i>
-                                </span>
-                                <span>試し読みする</span>
-                            </a>
+                            <form action="cusotomer_function/sample_view.php" method="post">
+                                <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
+                                <button  target="_blank" class="button is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-book-open"></i>
+                                    </span>
+                                    <span>試し読みする</span>
+                                </button>
+                            </form>
                         </div>
 
                         <!-- カートボタン -->
                         <div class="column is-narrow">
-                            <a href="customer_function/cart_add.php?book_id=<?= $book['book_id'] ?>" class="button is-primary">
-                                <span class="icon">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </span>
-                                <span>カートに追加</span>
-                            </a>
+                            <form action="cusotomer_function/cart_add.php" method="post">
+                                <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
+                                <button  class="button is-primary">
+                                    <span class="icon">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </span>
+                                    <span>カートに追加</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
 
