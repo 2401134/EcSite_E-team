@@ -48,5 +48,5 @@ if($book_id > 0){
 }
 
 // 元のページに戻る
-header("Location:../customer_home.php");
+header("Location: " . $_SERVER['HTTP_REFERER']);
 exit;

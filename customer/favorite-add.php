@@ -63,6 +63,14 @@ $favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
                         </button>
                     </form>
                 <?php } ?>
+                <!--お気に入り解除-->
+                <form action="customer_function/favarit.php" method="POST" style="margin-top:10px;">
+                    <input type="hidden" name="book_id" value="<?=htmlspecialchars($book['book_id'])?>">
+                    <button class="button is-light">
+                        <span class="icon"><i class="fa-solid fa-trash"><i></span>
+                        <span>解除</span>
+                    </button>
+                </form>
             </div>
 
         </div>
