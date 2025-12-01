@@ -1,3 +1,12 @@
+<?php
+    if(isset($_GET['status']) && $_GET['status'] == 1){
+        echo "
+            <script>
+                alert('パスワード変更に関するメールを送信しました。\\n届かない場合は時間をおいて再度お試しください。');
+            </script>
+        ";
+    }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -79,11 +88,12 @@
 </head>
 <body>
   
-  <img src="../uploads/image/booknest.png" alt="サイトロゴ">
+  <img src="../image/booknest.png" alt="サイトロゴ">
 
   <div class="register-container">
+    <form action="customer_function/auto.php" method="post">
       <label for="email">メールアドレス</label>
-      <input type="email" id="email" name="email" required>
+      <input type="address" name="address" required>
       
       <p>
         記入されたメールアドレス宛に、<br>
