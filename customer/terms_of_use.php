@@ -78,6 +78,18 @@ require 'db-connect.php';
                     以上
                 </p>
             </div>
+            
+        </div>
+
+
+        <div class="has-text-right mt-5">
+            <form action="customer_home.php" method="POST">
+                <input type="hidden" name="action" value="home">
+                <button class="button is-dark">
+                    <span class="icon"><i class="fas fa-home"></i></span>
+                    <span>ホームに戻る</span>
+                </button>
+            </form>
         </div>
 
     </div>
