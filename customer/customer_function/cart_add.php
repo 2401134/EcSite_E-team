@@ -59,11 +59,14 @@ try {
         $_SESSION['alert_msg'] = "カートに追加しました";
     }
 
-    // 試し読みへ戻る
-    echo "<script>
-        window.location.href = '../tryread.php';
+    $from = $_GET['from'] ?? 'home';
+        $redirect = ($from === 'tryread') ? '../tryread.php' : '../customer_home.php';
+
+        echo "<script>
+            alert('" . $_SESSION['alert_msg'] . "');
+            window.location.href = '$redirect';
         </script>";
-    exit;
+        exit;
 
 } catch (PDOException $e) {
     echo "エラー: " . $e->getMessage();
