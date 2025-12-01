@@ -98,7 +98,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <!-- お気に入り & レビュー -->
                     <div class="buttons is-right">
-                        <a href="favorite_add.php?book_id=<?= $book['book_id'] ?>" class="button is-light is-rounded">
+                        <a href="customer_function/favarit.php?book_id=<?= $book['book_id'] ?>" class="button is-light is-rounded">
                             <span class="icon"><i class="fas fa-star"></i></span>
                         </a>
 

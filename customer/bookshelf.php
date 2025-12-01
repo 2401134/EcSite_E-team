@@ -29,7 +29,7 @@
           <!-- 左：表紙画像 -->
           <div class="column is-narrow">
             <figure class="image is-3by4" style="width: 80px;border: 1px solid #4a4a4a;">
-              <img src="images/<?= htmlspecialchars($book['book_image'] ?: 'noimage.jpg') ?>" alt="<?= htmlspecialchars($book['title']) ?>" class="has-border">
+              <img src="<?= htmlspecialchars($book['book_image'] ?: 'noimage.jpg') ?>" alt="<?= htmlspecialchars($book['title']) ?>" class="has-border">
             </figure>
           </div>
 
