@@ -43,6 +43,14 @@
           <div class="column is-narrow has-text-right">
             <p><?= htmlspecialchars($book['price']) ?>円</p>
             <p><?= date('Y-m-d', strtotime($book['purchase_date'])) ?>に購入</p>
+            <!-- 🔹 レビュー画面へ -->
+            <form action="review.php" method="get" style="margin-top:10px;">
+                <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
+                <button type="submit" class="button is-white is-rounded" title="レビューを見る">
+                    <span class="icon"><i class="far fa-comment"></i></span>
+                    <span>レビューを見る</span>
+                </button>
+            </form>
           </div>
         </div>
         <?php } ?>
