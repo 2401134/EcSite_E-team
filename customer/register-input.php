@@ -90,7 +90,7 @@ if (!empty($_SESSION['alert_msg'])) {
   <div class="register-container">
     <form action="register-output.php" method="post">
       <label for="email">メールアドレス</label>
-      <input type="email" id="email" name="user_address" required maxlength="255" pattern="[A-Za-z0-9@]+" title="メールアドレスを入力してください">
+      <input type="email" id="email" name="user_address" required maxlength="255" pattern="[A-Za-z0-9@-._]+" title="メールアドレスを入力してください">
 
       <label for="password">パスワード</label>
       <input type="password" id="password" name="user_password" required maxlength="255" pattern="[A-Za-z0-9]+" title="半角英数字で入力してください">
