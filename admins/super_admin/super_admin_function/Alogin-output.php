@@ -2,23 +2,33 @@
 session_start();
 require 'db-connect.php';
 
-$admin_address = htmlspecialchars($_POST['admin_id'], ENT_QUOTES, 'UTF-8');
+$employee_id = htmlspecialchars($_POST['employee_id'], ENT_QUOTES, 'UTF-8');
 $admin_password = $_POST['admin_password'] ?? '';
 
-if (!empty($admin_id) && !empty($admin_password)) {
+if (!empty($employee_id) && !empty($admin_password)) {
     try {
         $pdo = new PDO($connect, USER, PASS);
-        $sql = $pdo->prepare('SELECT * FROM admins WHERE admin_id = ?');
-        $sql->execute([$admin_id]);
+        $sql = $pdo->prepare('SELECT * FROM admins WHERE employee_id = ?');
+        $sql->execute([$employee_id]);
         $admin = $sql->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        header("Location: Alogin-input.php");
+        $_SESSION['alert_msg'] = 'エラー';
+        echo "
+            <script>
+            window.location.href = '../Alogin-input.php';
+            </script>
+            ";
         exit;
     }
 
     if ($admin) {
         if($admin['admin_status'] === 1){
-            header("Location: Alogin-input.php");
+            $_SESSION['alert_msg'] = 'IDかパスワードが違います';
+            echo "
+            <script>
+            window.location.href = '../Alogin-input.php';
+            </script>
+            ";
             exit;
         }
         // ソルト取得
@@ -27,18 +37,33 @@ if (!empty($admin_id) && !empty($admin_password)) {
         $input_hashed = hash('sha256', $admin_password . $salt);
 
         if ($input_hashed === $admin['admin_password']) {
-            $_SESSION['admin_id'] = $admin['admin_id'];
-            header("Location: home.php");
+            $_SESSION['employee_id'] = $admin['employee_id'];
+            header("Location: ../super_admin_home.php");
             exit;
         } else {
-            header("Location: Alogin-input.php");
+            $_SESSION['alert_msg'] = 'IDかパスワードが違います';
+            echo "
+            <script>
+            window.location.href = '../Alogin-input.php';
+            </script>
+            ";
             exit;
         }
     } else {
-        header("Location: Alogin-input.php");
+        $_SESSION['alert_msg'] = 'IDかパスワードが違います';
+        echo "
+            <script>
+            window.location.href = '../Alogin-input.php';
+            </script>
+            ";
         exit;
     }
 } else {
-    header("Location: Alogin-input.php");
+    $_SESSION['alert_msg'] = 'IDかパスワードが違います';
+    echo "
+        <script>
+        window.location.href = '../Alogin-input.php';
+        </script>
+        ";
     exit;
 }
