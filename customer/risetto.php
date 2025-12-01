@@ -79,7 +79,7 @@
 </head>
 <body>
   
-  <img src="../image/booknest.png" alt="サイトロゴ">
+  <img src="../uploads/image/booknest.png" alt="サイトロゴ">
 
   <div class="register-container">
       <label for="email">メールアドレス</label>

@@ -1,5 +1,13 @@
 <?php
 require 'customer_function/favorite_controller.php' ;
+
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('ログインしてください');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+    echo "<script>history.back()</script>";
+    exit();
+}
+
 $favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
 ?>
 <!DOCTYPE html>
@@ -49,6 +57,7 @@ $favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null);
                     <p class="is-size-7">この商品は未購入です</p>
                     <form action="purchase.php" method="POST">
                         <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
+                        <input type="hidden" name="buy" value="0">
                         <button class="button is-dark">
                             <span>購入する</span>
                         </button>

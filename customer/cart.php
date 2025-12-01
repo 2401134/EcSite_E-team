@@ -1,10 +1,19 @@
 <?php
 require 'db-connect.php';
 session_start();
+?>
 
+<?php
+if (!empty($_SESSION['alert_msg'])) {
+    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+}
+?>
+
+<?php
 // ログインしていない場合はログイン画面へ
 if (!isset($_SESSION['user_id'])) {
-    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    echo "<script>alert('ログインしてください');</script>";
     unset($_SESSION['alert_msg']); // 1回だけ出す
     echo "<script>history.back()</script>";
     exit();
@@ -45,6 +54,7 @@ $cart_items = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         <div class ="allbuy has-text-right mb-6">
         <form action="purchase.php" method = "post">
+          <input type="hidden" name="buy" value="1">
           <button type="submit" class="button is-success is-large">
           <span class="icon">
             <i class="fas fa-credit-card"></i>
@@ -94,6 +104,7 @@ $cart_items = $sql->fetchAll(PDO::FETCH_ASSOC);
                 <div class="column is-narrow">
                   <form action="purchase.php" method="post">
                     <input type="hidden" name="book_id" value="<?php echo $item['book_id']; ?>">
+                    <input type="hidden" name="buy" value="0">
                     <button type="submit" class="button is-primary">
                       <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                       <span>購入する</span>
@@ -106,10 +117,12 @@ $cart_items = $sql->fetchAll(PDO::FETCH_ASSOC);
               <div class="buttons is-right">
 
         <!-- お気に入り -->
-                <form action="favorite.php" method="post">
-                  <input type="hidden" name="book_id" value="<?php echo $item['book_id']; ?>">
-                  <button type="submit" class="button is-light is-rounded">
-                    <span class="icon"><i class="fas fa-star"></i></span>
+                <form action="customer_function/favarit.php" method="POST" style="display:inline;">
+                  <input type="hidden" name="book_id" value="<?= $book_id ?>">
+                  <button type="submit" class="button is-white is-rounded" title="お気に入り登録">
+                    <span class="icon">
+                      <i class="far fa-star"></i>
+                    </span>
                   </button>
                 </form>
 

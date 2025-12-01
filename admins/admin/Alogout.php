@@ -57,14 +57,14 @@
 
     <div class="container">
     <div style="text-align: center;">
-        <img src="img/booknest.png" alt="books">    
+        <img src="../../uploads/image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
     </div>
 
         <p class="message">
             ログアウトしました。
         </p>
 
-        <a href="login.php" class="re-login-btn">
+        <a href="Alogin-input.php" class="re-login-btn">
             再ログイン
         </a>
     </div>

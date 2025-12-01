@@ -3,16 +3,22 @@ session_start();
 require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
-$user_id = $_SESSION['user_id'] ?? null;
-$book_id = $_POST['book_id'] ?? 0;
-
-if (!$user_id) {
+if (!isset($_SESSION['user_id'])) {
     // ゲストの場合はアラートを出してホームに戻す
     echo "<script>
         alert('ゲストユーザーはお気に入り登録できません。ログインしてください。');
         window.location.href = '../customer_home.php';
     </script>";
     exit; // これ以上処理しない
+}
+
+$user_id = $_SESSION['user_id'];
+if (!empty($_POST['book_id'])) {
+    $book_id = (int)$_POST['book_id'];
+} elseif (!empty($_SESSION['book_id'])) {
+    $book_id = (int)$_SESSION['book_id'];
+} else {
+    $book_id = null;
 }
 
 if($book_id > 0){
@@ -27,10 +33,12 @@ if($book_id > 0){
             // 現在登録済み → 論理削除（解除）
             $update = $pdo->prepare("UPDATE favorites SET favorite_status=1 WHERE favorite_id=?");
             $update->execute([$fav['favorite_id']]);
+            $_SESSION['alert_msg'] ='お気に入り解除しました';
         } else {
             // 論理削除されている → 再登録
             $update = $pdo->prepare("UPDATE favorites SET favorite_status=0, favorite_date=? WHERE favorite_id=?");
             $update->execute([$now, $fav['favorite_id']]);
+            $_SESSION['alert_msg'] = 'お気に入り追加しました';
         }
     } else {
         // 新規登録
