@@ -7,7 +7,11 @@
 <body>
 
     <div style="text-align: center;">
+<<<<<<< HEAD
         <img src="../../image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
+=======
+        <img src="../../uploads/image/booknest.png"  width="100px" height="100px" alt="books">    
+>>>>>>> 275d7756292ca978c366c6c22b02ea6723f017bc
     </div>
     
     <form action="#" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
