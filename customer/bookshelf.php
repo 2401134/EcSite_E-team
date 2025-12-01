@@ -46,9 +46,9 @@
             <!-- 🔹 レビュー画面へ -->
             <form action="review.php" method="get" style="margin-top:10px;">
                 <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
-                <button type="submit" class="button is-white is-rounded" title="レビューを見る">
+                <button type="submit" class="button is-white" title="レビューを見る">
                     <span class="icon"><i class="far fa-comment"></i></span>
-                    <span>レビューを見る</span>
+                    <span>レビューを書く</span>
                 </button>
             </form>
           </div>
