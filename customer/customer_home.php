@@ -52,14 +52,6 @@ if (!empty($_SESSION['alert_msg'])) {
               <p class="subtitle is-7"><?= $synopsis ?></p>
 
               <div class="level-right">
-                <!--カート追加-->
-                <form action="customer_function/cart_add.php" method="GET" style="margin-top:10px;">
-                <input type="hidden" name="book_id" value="<?= htmlspecialchars($row['book_id']) ?>">
-                <button type="submit" class="button is-white is-rounded" title="カート追加">
-                    <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
-                </button>
-                </form>
-
                 <!-- 🔹お気に入り登録フォーム -->
                 <form action="customer_function/favarit.php" method="POST" style="display:inline;">
                   <input type="hidden" name="book_id" value="<?= $book_id ?>">
