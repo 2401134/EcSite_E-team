@@ -77,7 +77,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <!-- 試し読みボタン -->
                         <div class="column is-narrow">
-                            <form action="cusotomer_function/sample_view.php" method="post">
+                            <form action="customer_function/sample_view.php" method="post">
                                 <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
                                 <button  target="_blank" class="button is-dark">
                                     <span class="icon">
@@ -90,7 +90,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <!-- カートボタン -->
                         <div class="column is-narrow">
-                            <form action="cusotomer_function/cart_add.php" method="post">
+                            <form action="customer_function/cart_add.php" method="post">
                                 <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
                                 <button  class="button is-primary">
                                     <span class="icon">
@@ -104,13 +104,22 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <!-- お気に入り & レビュー -->
                     <div class="buttons is-right">
-                        <a href="customer_function/favarit.php?book_id=<?= $book['book_id'] ?>" class="button is-light is-rounded">
-                            <span class="icon"><i class="fas fa-star"></i></span>
-                        </a>
-
-                        <a href="review.php?book_id=<?= $book['book_id'] ?>" class="button is-light is-rounded">
-                            <span class="icon"><i class="fas fa-comment-alt"></i></span>
-                        </a>
+                        <form action="customer_function/favarit.php" method="post">
+                            <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
+                            <button  class="button is-light is-rounded">
+                                <span class="icon">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            </button>
+                        </form>
+                        <form action="review.php" method="post">
+                            <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
+                            <button  class="button is-light is-rounded">
+                                <span class="icon">
+                                    <i class="fas fa-comment-alt"></i>
+                                </span>
+                            </button>
+                        </form>
                     </div>
 
                 </div>
