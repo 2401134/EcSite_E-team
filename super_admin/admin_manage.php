@@ -30,7 +30,6 @@ $admins = $stmt->fetchAll();
     </style>
 </head>
 <body>
-    <?php require 'header.php'; ?>
     <?php require 'menu.php'; ?>
 
     <section class="section">
