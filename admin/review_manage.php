@@ -13,6 +13,7 @@
     </style>
 </head>
 <body>
+
     <?php require 'menu.php'?>
 
     <section class="section">
@@ -77,7 +78,7 @@
             <!-- ホームに戻る -->
             <div class="has-text-right mt-5">
                 <a href="admin_home.php" class="button is-black">
-                <span class="icon"><i class="fas fa-home mr-1"></i></span>
+                <span class="icon"><i class="fas fa-home"></i></span>
                 <span>ホームに戻る</span>
                 </a>
             </div>
