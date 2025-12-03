@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>決済方法</title>
-  <!-- Bulma -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -27,7 +25,7 @@
       <!-- 横並び -->
       <div class="buttons is-centered mt-5" style="gap: 3rem;">
         <!-- 現金決済 -->
-        <form action="cash.php" method="POST" style="margin-right: 1rem;">
+        <form action="cash.php" method="GET" style="margin-right: 1rem;">
           <button type="submit" name="payment" value="cash"style="width: 120px; height: 120px;" 
           class="button is-large is-rounded">
             <span class="icon is-large"><i class="fas fa-dollar-sign"></i></span>
@@ -36,7 +34,7 @@
         </form>
 
         <!-- カード決済 -->
-        <form action="card.php" method="POST">
+        <form action="card.php" method="GET">
           <button type="submit" name="payment" value="card" style="width: 120px; height: 120px;"
            class="button  is-large is-rounded">
             <span class="icon is-large"><i class="fas fa-credit-card"></i></span>
