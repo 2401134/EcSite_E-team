@@ -1,4 +1,3 @@
-    if (!ctype_digit($search_book_id)) {
 <!DOCTYPE html>
 <html lang="ja">
 <head>
