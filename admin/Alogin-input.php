@@ -19,7 +19,7 @@ if (isset($_SESSION["alert_msg"])) {
         <img src="../uploads/image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
     </div>
     
-    <form action="Alogin-output.php" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
+    <form action="admin_function/Alogin-output.php" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
         
         <label for="id">社員ID</label><br>
         <input type="text" id="id" name="admin_id" style="width: 100%; padding: 8px; margin-bottom: 15px;border-radius: 5px;"><br>
@@ -31,12 +31,7 @@ if (isset($_SESSION["alert_msg"])) {
             ログイン
         </button>
         
-        <div style="text-align: center; margin-top: 15px;">
-            <a href="#">パスワードを忘れた場合</a>
-        </div>
-        
     </form>
-    
 
 </body>
 </html>
