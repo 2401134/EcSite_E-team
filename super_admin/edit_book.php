@@ -40,7 +40,6 @@ if (!$book) {
 </head>
 <body>
 
-    <?php require 'header.php'?>
     <?php require 'menu.php'?>
 
     <section>

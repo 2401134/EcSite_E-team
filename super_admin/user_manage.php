@@ -25,7 +25,7 @@ try {
 </head>
 <body>
 
-<?php require 'header.php'; ?>
+
 <?php require 'menu.php'; ?>
 
 <section class="section">
@@ -89,7 +89,7 @@ try {
         <?php endforeach; ?>
 
         <div class="has-text-right mt-5">
-            <a href="admin_home.php" class="button is-black">
+            <a href="super_admin_home.php" class="button is-black">
                 <span class="icon"><i class="fas fa-home"></i></span>
                 <span>ホームに戻る</span>
             </a>

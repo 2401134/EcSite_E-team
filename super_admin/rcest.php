@@ -100,7 +100,7 @@ if (!empty($_SESSION['alert_msg'])) {
 <body>
   <div class="container">
     <div class="logo">
-      <img src="../../uploads/image/booknest.png" alt="Book Nest ロゴ">
+      <img src="../uploads/image/booknest.png" alt="Book Nest ロゴ">
     </div>
 
     <form class="form-box" action="super_admin_function/insert_admin.php" method="post">
