@@ -3,7 +3,7 @@ session_start();
 require 'db-connect.php';
 
 // book_id 取得チェック
-if (!isset($_GET['book_id'])) {
+if (!isset($_POST['book_id'])) {
     echo '<script>
         http_response_code(404);
         history.back();
@@ -11,7 +11,7 @@ if (!isset($_GET['book_id'])) {
     exit;
 }
 
-$book_id = (int)$_GET['book_id'];
+$book_id = (int)$_POST['book_id'];
 
 // ▼ ログインしていない場合
 if (!isset($_SESSION['user_id'])) {
@@ -59,14 +59,11 @@ try {
         $_SESSION['alert_msg'] = "カートに追加しました";
     }
 
-    $from = $_GET['from'] ?? 'home';
-        $redirect = ($from === 'tryread') ? '../tryread.php' : '../customer_home.php';
-
-        echo "<script>
-            alert('" . $_SESSION['alert_msg'] . "');
-            window.location.href = '$redirect';
+    // 試し読みへ戻る
+    echo "<script>
+        window.location.href = '../tryread.php';
         </script>";
-        exit;
+    exit;
 
 } catch (PDOException $e) {
     echo "エラー: " . $e->getMessage();
