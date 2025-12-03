@@ -56,7 +56,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-<?php require 'header.php' ?>
+
 <?php require 'menu.php' ?>
 
 <section class="section">

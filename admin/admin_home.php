@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-  <?php require 'header.php'?>
+  
     <?php require 'menu.php'?>
     <h1 class="has-text-right subtitle">
         <a href="../super_admin/super_admin_home.php">総合管理者ホームへ

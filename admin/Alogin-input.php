@@ -16,10 +16,10 @@ if (isset($_SESSION["alert_msg"])) {
 <body>
 
     <div style="text-align: center;">
-        <img src="../../uploads/image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
+        <img src="../uploads/image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
     </div>
     
-    <form action="#" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
+    <form action="Alogin-output.php" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
         
         <label for="id">社員ID</label><br>
         <input type="text" id="id" name="admin_id" style="width: 100%; padding: 8px; margin-bottom: 15px;border-radius: 5px;"><br>

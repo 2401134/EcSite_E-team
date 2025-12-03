@@ -57,7 +57,7 @@
 
     <div class="container">
     <div style="text-align: center;">
-        <img src="../../uploads/image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
+        <img src="../uploads/image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
     </div>
 
         <p class="message">
