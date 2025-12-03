@@ -53,8 +53,8 @@
             </form>
           </div>
         </div>
-        <?php } ?>
       </div>
+      <?php } ?>
 
       <!-- 🏠 ホームに戻る -->
        <div class="has-text-right mt-5">
