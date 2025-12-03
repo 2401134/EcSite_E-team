@@ -1,4 +1,19 @@
-<?php session_start() ?>
+<?php 
+session_start();
+
+if (isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
+if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
+    echo '<script>
+          alert("総合管理者の権限がありません");
+          history.back();
+          </script>';
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-  
+  <?php require 'header.php'?>
     <?php require 'menu.php'?>
       <section class="section">
     <div class="container">

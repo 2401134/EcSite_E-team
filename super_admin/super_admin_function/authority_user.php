@@ -2,7 +2,8 @@
 require 'db-connect.php';
 
 if (!isset($_POST['user_id'])) {
-    exit("ユーザーIDがありません");
+    http_response_code(404);
+    exit;
 }
 
 $user_id = $_POST['user_id'];
@@ -17,7 +18,9 @@ try {
     $status = $stmt->fetchColumn();
 
     if ($status === false) {
-        exit("ユーザーが見つかりません");
+        $_SESSION['alert_msg'] = '管理者が見つかりません';
+        header("Location: ../user_manage.php");
+        exit;
     }
 
     // 0 → 1（停止）、1 → 0（回復）
@@ -30,6 +33,8 @@ try {
     header("Location: ../user_manage.php");
     exit;
 
-} catch (PDOException $e) {
-    exit("エラー: " . $e->getMessage());
+    } catch (PDOException $e) {
+    $_SESSION['alert_msg'] = '管理者が見つかりません';
+    header("Location: ../user_manage.php");
+    exit;
 }

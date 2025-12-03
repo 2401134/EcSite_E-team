@@ -9,6 +9,17 @@ $admin_password = $_POST['admin_password'];
 $employee_id    = $_POST['employee_id'];
 $role           = isset($_POST['role']) ? 1 : 0; // チェックされていたら 1
 
+$check = $pdo->prepare("SELECT COUNT(*) FROM admins WHERE employee_id = ?");
+$check->execute([$employee_id]);
+$count = $check->fetchColumn();
+
+if ($count > 0) {
+    // 同じ employee_id が存在 → 登録拒否
+    $_SESSION['alert_msg'] = "登録に失敗しました。";
+    header("Location: ../rcest.php");
+    exit();
+}
+
 // --- super_admin の判定 ---
 // チェックなし → super_admin = 1
 // チェックあり → super_admin = 0

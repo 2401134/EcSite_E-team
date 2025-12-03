@@ -1,18 +1,38 @@
 <?php 
+require 'db-connect.php';
 session_start();
 if (!empty($_SESSION['alert_msg'])) {
     echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
     unset($_SESSION['alert_msg']); // 1回だけ出す
 }
+
+if (isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
+if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
+    echo '<script>
+          alert("総合管理者の権限がありません");
+          history.back();
+          </script>';
+    exit;
+}
 ?>
 
 <?php
-require 'db-connect.php';
+try {
+    $pdo = new PDO($connect, USER, PASS);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// 管理者一覧を取得
-$pdo = new PDO($connect, USER, PASS);
-$stmt = $pdo->query("SELECT * FROM admins ORDER BY admin_id ASC");
-$admins = $stmt->fetchAll();
+    // ユーザー一覧
+    $stmt = $pdo->query("SELECT * FROM admins ORDER BY admin_id ASC");
+    $admins = $stmt->fetchAll();
+
+} catch (PDOException $e) {
+    echo '<script>alert("データベース接続失敗")</script>';
+    echo 'history.back()';
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +50,7 @@ $admins = $stmt->fetchAll();
     </style>
 </head>
 <body>
+    <?php require 'header.php'; ?>
     <?php require 'menu.php'; ?>
 
     <section class="section">

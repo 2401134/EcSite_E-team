@@ -1,16 +1,37 @@
 <?php
 require 'db-connect.php';
+session_start();
+if (!empty($_SESSION['alert_msg'])) {
+    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+}
 
+if (isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
+if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
+    echo '<script>
+          alert("総合管理者の権限がありません");
+          history.back();
+          </script>';
+    exit;
+}
+?>
+
+<?php
 try {
     $pdo = new PDO($connect, USER, PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // ユーザー一覧
     $stmt = $pdo->query("SELECT * FROM users ORDER BY user_id ASC");
-    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $users = $stmt->fetchAll();
 
 } catch (PDOException $e) {
-    exit("データベース接続失敗: " . $e->getMessage());
+    echo '<script>alert("データベース接続失敗")</script>';
+    echo 'history.back()';
 }
 ?>
 
@@ -25,13 +46,13 @@ try {
 </head>
 <body>
 
-
+<?php require 'header.php'; ?>
 <?php require 'menu.php'; ?>
 
 <section class="section">
     <div class="container">
         <h1 class="title">ユーザー管理</h1>
-
+        
         <?php foreach ($users as $user): ?>
             <div class="box user-info">
                 <div class="columns is-vcentered mb-2">
@@ -50,7 +71,7 @@ try {
                 <div class="history_browse is-flex is-justify-content-flex-end">
 
                     <!-- 購入履歴 -->
-                    <form action="../admin/purchase_history.php" method="post" class="mr-4">
+                    <form action="purchase_history.php" method="post" class="mr-4">
                         <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
                         <button type="submit" class="button is-normal is-light">
                             <span class="icon"><i class="fas fa-shopping-cart"></i></span>
@@ -59,7 +80,7 @@ try {
                     </form>
 
                     <!-- レビュー履歴 -->
-                    <form action="../user_review_manage.php" method="post" class="mr-4">
+                    <form action="user_review_manage.php" method="post" class="mr-4">
                         <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
                         <button class="button is-normal is-light">
                             <span class="icon"><i class="fas fa-comment-dots"></i></span>
