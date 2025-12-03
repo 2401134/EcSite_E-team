@@ -12,6 +12,7 @@ $sql_user = "
     SELECT 
         ul.user_log_id AS log_id,
         u.user_name AS user_name,
+        u.user_id AS user_id,
         CONCAT(ul.target_table, ' (ID:', ul.target_id, ')') AS target,
         ul.user_action AS action,
         ul.log_date
@@ -24,6 +25,7 @@ $sql_admin = "
     SELECT
         al.admin_log_id AS log_id,
         a.admin_name AS user_name,
+        a.admin_id AS user_id,
         CONCAT(al.target_table, ' (ID:', al.target_id, ')') AS target,
         al.admin_action AS action,
         al.log_date
@@ -53,6 +55,13 @@ switch($sort){
         break;
     default:
         $sql .= " ORDER BY log_date DESC";
+}
+
+function displayUserName($user_name, $log_id) {
+    if ($user_name === null || $user_name === '未登録') {
+        return '未登録 (user ID:' . $log_id . ')';
+    }
+    return $user_name;
 }
 
 $stmt = $pdo->query($sql);

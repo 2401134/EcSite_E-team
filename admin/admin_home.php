@@ -42,7 +42,7 @@
 
         <!-- ユーザー管理 -->
         <div class="column is-one-third">
-          <form action="user_manage" method="POST">
+          <form action="user_manage.php" method="POST">
             <button class="button is-light is-large is-rounded" style="height: 120px; width: 120px; ">
               <i class="fas fa-user fa-2x"></i>
             </button>

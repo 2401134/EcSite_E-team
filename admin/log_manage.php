@@ -30,7 +30,7 @@
 
                     <p class=control>
                         <span class="select is-small mr-4">
-                            <select>
+                            <select name="sort">
                                 <option value="date"<?= $sort=='date'?'selected':'' ?>>日時順</option>
                                 <option value="user"<?= $sort=='user'?'selected':'' ?>>作業者順</option>
                                 <option value="action"<?= $sort=='action'?'selected':'' ?>>操作内容順</option>
@@ -45,8 +45,7 @@
                             <span>ソート</span>
                         </button>
                     </p>
-
-                </div>        
+                </form>    
             </div>
 
             <!-- ログ一覧 -->
@@ -57,7 +56,7 @@
                         <tr>
                             <th>日時</th>
                             <th>作業者</th>
-                            <th>作業対象</th>
+                            <th>操作対象</th>
                             <th>操作内容</th>
                         </tr>
                     </thead>
@@ -65,7 +64,7 @@
                         <?php foreach($logs as $log){ ?>
                         <tr>
                             <td><?= htmlspecialchars(date('Y-m-d H:i', strtotime($log['log_date']))) ?></td>
-                            <td><?= htmlspecialchars($log['user_name']) ?></td>
+                            <td><?= htmlspecialchars(displayUserName($log['user_name'],$log['log_id'])) ?></td>
                             <td><?= htmlspecialchars($log['target']) ?></td>
                             <td><?= htmlspecialchars($log['action']) ?></td>
                         </tr>
@@ -73,9 +72,7 @@
                     </tbody>                 
                 </table>
             </div>
-
         </div>
-
         <!--ホームに戻る-->
         <div class="has-text-right mt-5">
             <form action="admin_home.php" method="POST">
