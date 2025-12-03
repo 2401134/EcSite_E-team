@@ -31,12 +31,7 @@ if (isset($_SESSION["alert_msg"])) {
             ログイン
         </button>
         
-        <div style="text-align: center; margin-top: 15px;">
-            <a href="#">パスワードを忘れた場合</a>
-        </div>
-        
     </form>
-    
 
 </body>
 </html>
