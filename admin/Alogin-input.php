@@ -16,7 +16,7 @@ if (isset($_SESSION["alert_msg"])) {
 <body>
 
     <div style="text-align: center;">
-        <img src="../../uploads/image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
+        <img src="../uploads/image/booknest.png" alt="books" style="max-width: 200px; height: auto;">    
     </div>
     
     <form action="admin_function/Alogin-output.php" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
