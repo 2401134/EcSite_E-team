@@ -2,26 +2,32 @@
 session_start();
 require 'db-connect.php';
 
-// ▼ セッション buy がセットされていない場合は戻す
-if (!isset($_POST['buy'])) {
-    echo "<script>http_response_code(404); history.back();</script>";
+// ▼ 決済方法が未選択の場合（purchase_process が 1 または 2 でない）
+if (
+    !isset($_SESSION['purchase_process']) ||
+    ($_SESSION['purchase_process'] != 1 && $_SESSION['purchase_process'] != 2)
+) {
+    echo "<script>alert('購入方法が選択されていません。'); history.back();</script>";
     exit;
 }
 
-// ▼ 個別購入のときだけ book_id をセッションへ保存
-if (isset($_POST['buy']) && $_POST['buy'] == 0 && isset($_POST['book_id'])) {
-    $_SESSION['book_id'] = (int)$_POST['book_id'];
+// ▼ buy が POST されていない → このページに来てはいけない
+if (!isset($_POST['buy'])) {
+    echo "<script>alert('購入方法が不正です。'); history.back();</script>";
+    exit;
 }
 
-// ▼ buy の値もセッションに保存
-if (isset($_POST['buy'])) {
-    $_SESSION['buy'] = (int)$_POST['buy'];
+// ▼ buy モードを保存
+$_SESSION['buy'] = (int)$_POST['buy'];
+
+// ▼ 個別購入のときだけ book_id を保存
+if ($_SESSION['buy'] === 0 && isset($_POST['book_id'])) {
+    $_SESSION['book_id'] = (int)$_POST['book_id'];
 }
 
 $pdo = new PDO($connect, USER, PASS);
 $user_id = $_SESSION['user_id'];
 
-// ▼ 購入方法確認
 $buy_mode = $_SESSION['buy'];   // 1 = 全部購入, 0 = 1冊購入
 
 $books = [];
