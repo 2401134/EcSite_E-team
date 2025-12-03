@@ -2,7 +2,7 @@
 session_start();
 require 'db-connect.php';
 
-$admin_address = htmlspecialchars($_POST['admin_id'], ENT_QUOTES, 'UTF-8');
+$admin_id = htmlspecialchars($_POST['admin_id'], ENT_QUOTES, 'UTF-8');
 $admin_password = $_POST['admin_password'] ?? '';
 
 if (!empty($admin_id) && !empty($admin_password)) {
@@ -12,13 +12,23 @@ if (!empty($admin_id) && !empty($admin_password)) {
         $sql->execute([$admin_id]);
         $admin = $sql->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        header("Location: Alogin-input.php");
+        $_SESSION['alert_msg'] = $e;
+        echo "
+            <script>
+            window.location.href = 'Alogin-input.php';
+            </script>
+            ";
         exit;
     }
 
     if ($admin) {
         if($admin['admin_status'] === 1){
-            header("Location: Alogin-input.php");
+            $_SESSION['alert_msg'] = "IDかパスワードが違います。";
+            echo "
+            <script>
+            window.location.href = 'Alogin-input.php';
+            </script>
+            ";
             exit;
         }
         // ソルト取得
@@ -28,17 +38,32 @@ if (!empty($admin_id) && !empty($admin_password)) {
 
         if ($input_hashed === $admin['admin_password']) {
             $_SESSION['admin_id'] = $admin['admin_id'];
-            header("Location: home.php");
+            header("Location: admin_home.php");
             exit;
         } else {
-            header("Location: Alogin-input.php");
+            $_SESSION['alert_msg'] = "IDかパスワードが違います。";
+            echo "
+            <script>
+            window.location.href = 'Alogin-input.php';
+            </script>
+            ";
             exit;
         }
     } else {
-        header("Location: Alogin-input.php");
+        $_SESSION['alert_msg'] = "IDかパスワードが違います。";
+        echo "
+            <script>
+            window.location.href = 'Alogin-input.php';
+            </script>
+            ";
         exit;
     }
 } else {
-    header("Location: Alogin-input.php");
+    $_SESSION['alert_msg'] = "入力してください。";
+    echo "
+        <script>
+        window.location.href = 'Alogin-input.php';
+        </script>
+        ";
     exit;
 }
