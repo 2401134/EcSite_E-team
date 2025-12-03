@@ -211,7 +211,7 @@ function starRating(int $rank): string {
     <div class="has-text-right mt-5">
         <a href="book_list.php" class="button is-link">書籍一覧へ</a>
         <a href="admin_home.php" class="button is-black">
-            <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="icon mr-1"><i class="fas fa-home"></i></span>
             ホームへ戻る
         </a>
     </div>
