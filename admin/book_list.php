@@ -56,7 +56,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-
+<?php require 'header.php' ?>
 <?php require 'menu.php' ?>
 
 <section class="section">
@@ -82,6 +82,16 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </div>
     </form>
 
+    <!-- 書籍追加ボタン -->
+    <div class="book-buttons has-text-centered">
+      <form action="add_book.php" method="get">
+        <button type="submit" class="button is-light is-rounded is-large">
+          <span class="icon"><i class="fas fa-plus"></i></span>
+        </button>
+        <p>書籍を追加</p>
+      </form>
+    </div>
+
     <!-- 書籍一覧表示 -->
     <?php foreach ($books as $book): ?>
     <div class="box book-box">
@@ -100,7 +110,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
           
           <p>
             <strong>タイトル：</strong>
-            <a href="book_review.php?book_id=<?= $book['book_id'] ?>">
+            <a href="review_manage.php?book_id=<?= $book['book_id'] ?>">
               <?= htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8') ?>
             </a>
           </p>
