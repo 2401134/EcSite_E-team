@@ -4,6 +4,19 @@ if (!empty($_SESSION['alert_msg'])) {
     echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
     unset($_SESSION['alert_msg']); // 1回だけ出す
 }
+
+if (isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
+if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
+    echo '<script>
+          alert("総合管理者の権限がありません");
+          history.back();
+          </script>';
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +113,7 @@ if (!empty($_SESSION['alert_msg'])) {
 <body>
   <div class="container">
     <div class="logo">
-      <img src="../uploads/image/booknest.png" alt="Book Nest ロゴ">
+      <img src="../../uploads/image/booknest.png" alt="Book Nest ロゴ">
     </div>
 
     <form class="form-box" action="super_admin_function/insert_admin.php" method="post">
