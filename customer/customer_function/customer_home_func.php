@@ -7,7 +7,7 @@
 
     // 🔹 書籍データ取得
     function getBooks($pdo){
-    $sql = "SELECT book_id, title, synopsis, book_image FROM books";
+    $sql = "SELECT book_id, title, synopsis, book_image FROM books WHERE book_status = 0";
     $stmt = $pdo->query($sql);
     $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
      return $books;

@@ -13,7 +13,7 @@ if (!empty($_SESSION['alert_msg'])) {
 <?php
 // books 全件取得
 $pdo = new PDO($connect, USER, PASS);
-$stmt = $pdo->prepare("SELECT * FROM books ORDER BY book_id ASC");
+$stmt = $pdo->prepare("SELECT * FROM books WHERE book_status = 0 ORDER BY book_id ASC");
 $stmt->execute();
 $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -77,9 +77,9 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <!-- 試し読みボタン -->
                         <div class="column is-narrow">
-                            <form action="customer_function/sample_view.php" method="post">
+                            <form action="customer_function/sample_view.php" method="post" target="_blank">
                                 <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
-                                <button  target="_blank" class="button is-dark">
+                                <button class="button is-dark">
                                     <span class="icon">
                                         <i class="fas fa-book-open"></i>
                                     </span>
