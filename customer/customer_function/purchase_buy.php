@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// ▼ purchase_process チェック
+// ▼ purchase_process チェック（1=通常購入, 2=ポイント使用）
 if (
     !isset($_SESSION['purchase_process']) ||
     ($_SESSION['purchase_process'] != 1 && $_SESSION['purchase_process'] != 2)
@@ -17,7 +17,7 @@ if (
     exit;
 }
 
-// ▼ buy モード（0 = 1冊, 1 = 全て購入）
+// ▼ buy モード（0 = 1冊, 1 = 全購入）
 if (!isset($_SESSION['buy'])) {
     echo "<script>alert('購入方法が指定されていません。'); history.back();</script>";
     exit;
@@ -29,11 +29,9 @@ $user_id = $_SESSION['user_id'];
 $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
 // ▼ 使用ポイント
 $use_point = isset($_POST['use_point']) ? (int)$_POST['use_point'] : 0;
 if ($use_point < 0) $use_point = 0;
-
 
 // ▼ ユーザーの所持ポイント取得
 $point_sql = $pdo->prepare("SELECT point FROM users WHERE user_id = ?");
@@ -78,7 +76,7 @@ foreach ($books as $b) {
     $total_price += (int)$b['price'];
 }
 
-// ▼ ポイント使用上限（購入金額 & 所持ポイント）
+// ▼ ポイント使用上限
 $max_use_point = min($my_point, $total_price);
 
 // ▼ バリデーション
@@ -90,22 +88,19 @@ if ($use_point > $max_use_point) {
 // ▼ 実際に支払う金額
 $final_payment = $total_price - $use_point;
 
-
-// ▼ 購入済みチェック（同じ本の重複購入防止）
-$chk = $pdo->prepare("
-    SELECT book_id FROM purchases WHERE user_id = ?
-");
+// ▼ 重複購入チェック
+$chk = $pdo->prepare("SELECT book_id FROM purchases WHERE user_id = ?");
 $chk->execute([$user_id]);
 $already = array_column($chk->fetchAll(PDO::FETCH_ASSOC), "book_id");
 
-
-// ▼ 購入処理を開始（トランザクション）
+// ▼ トランザクション開始
 $pdo->beginTransaction();
 
 try {
 
     // ▼ 購入履歴に追加
     $now = date("Y-m-d H:i:s");
+
     $insert = $pdo->prepare("
         INSERT INTO purchases (user_id, book_id, purchase_date)
         VALUES (?, ?, ?)
@@ -123,25 +118,44 @@ try {
         ]);
     }
 
-    // ▼ ポイント更新（減算）
-    $update_point = $pdo->prepare("
-        UPDATE users SET point = point - ? WHERE user_id = ?
-    ");
-    $update_point->execute([$use_point, $user_id]);
-
-    // ▼  購入金額の1%ポイント付与
-    $add_point = floor($final_payment * 0.01);   // 小数切り捨て
-    $add_point_sql = $pdo->prepare("
-        UPDATE users SET point = point + ? WHERE user_id = ?
-    ");
-    $add_point_sql->execute([$add_point, $user_id]);
-
-    // ▼ カート購入の場合はカートから削除
-    if ($buy_mode == 1) {
-        $del = $pdo->prepare("DELETE FROM carts WHERE user_id = ? AND cart_status = 0");
-        $del->execute([$user_id]);
+    // ▼ ポイント減算
+    if ($use_point > 0) {
+        $update_point = $pdo->prepare("
+            UPDATE users SET point = point - ? WHERE user_id = ?
+        ");
+        $update_point->execute([$use_point, $user_id]);
     }
 
+    // ▼ ポイント 1% 付与
+    $add_point = floor($final_payment * 0.01);
+    if ($add_point > 0) {
+        $add_point_sql = $pdo->prepare("
+            UPDATE users SET point = point + ? WHERE user_id = ?
+        ");
+        $add_point_sql->execute([$add_point, $user_id]);
+    }
+
+    // ▼ カート論理削除（cart_status = 1）
+    if ($buy_mode == 1) {
+
+        // 全購入 → 該当ユーザーのカート全部
+        $cart_update = $pdo->prepare("
+            UPDATE carts SET cart_status = 1
+            WHERE user_id = ? AND cart_status = 0
+        ");
+        $cart_update->execute([$user_id]);
+
+    } else {
+
+        // 1冊購入 → カートにあればその1冊だけ論理削除
+        $cart_update = $pdo->prepare("
+            UPDATE carts SET cart_status = 1
+            WHERE user_id = ? AND book_id = ? AND cart_status = 0
+        ");
+        $cart_update->execute([$user_id, $book_id]);
+    }
+
+    // ▼ コミット
     $pdo->commit();
 
     echo "<script>
