@@ -5,7 +5,7 @@ if (!empty($_SESSION['alert_msg'])) {
     unset($_SESSION['alert_msg']); // 1回だけ出す
 }
 
-if (isset($_SESSION['admin_id'])) {
+if (!isset($_SESSION['admin_id'])) {
     http_response_code(404);
     exit;
 }
