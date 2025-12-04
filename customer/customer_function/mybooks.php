@@ -4,6 +4,15 @@ require 'db-connect.php';
 
 $pdo = new PDO($connect, USER, PASS);
 
+if (!$user_id) {
+    // ゲストの場合はアラートを出してホームに戻す
+    echo "<script>
+        alert('ゲストユーザーはお気に入り登録できません。ログインしてください。');
+        window.location.href = 'customer_home.php';
+    </script>";
+    exit; // これ以上処理しない
+}
+
 // 🔹ログインユーザーID
 $user_id = $_SESSION['user_id'] ?? null;
 

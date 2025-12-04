@@ -1,13 +1,11 @@
-<?php require 'customer_function/mybooks.php'?>
+<?php require 'customer_function/mybooks.php' ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>本棚</title>
-  <!-- Bulma -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -22,7 +20,7 @@
         <?php } ?>
 
         <?php foreach ($books as $book){ ?>
-      <!-- 📘 本のカード -->
+      <!-- 本のカード -->
       <div class="box">
         <div class="columns is-vcentered">
           
@@ -47,7 +45,7 @@
 
         <div class="buttons mt-2 is-flex is-justify-content-flex-end">
 
-    <!-- 📖 読むボタン（直接開く） -->
+    <!-- 読むボタン -->
     <form action="customer_function/read_func.php" method="POST" target="_blank">
     <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
     <button type="submit" class="button is-link is-light">
@@ -56,7 +54,7 @@
     </button>
     </form>
 
-    <!-- 💬 レビュー画面へ -->
+    <!-- レビュー画面へ -->
     <form action="review.php" method="get" style="margin-left: 5px;">
         <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
         <button type="submit" class="button is-white is-small">
@@ -73,7 +71,7 @@
       </div>
       <?php } ?>
 
-      <!-- 🏠 ホームに戻る -->
+      <!-- ホームに戻る -->
     </div>
       <div class="has-text-right mt-5">
         <form action="customer_home.php" method="POST">
