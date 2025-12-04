@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,6 +11,24 @@
 <body>
   <?php require 'header.php'; ?>
   <?php require 'menu.php'; ?>
+  <?php
+      require 'db-connect.php';
+      $pdo = new PDO($connect, USER, PASS);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      $user_id = $_SESSION['user_id'] ?? null;
+
+      $point = 0;
+
+      if ($user_id) {
+          $stmt = $pdo->prepare("SELECT point FROM users WHERE user_id = ?");
+          $stmt->execute([$user_id]);
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          if ($row) {
+              $point = (int)$row['point'];
+          }
+      }
+  ?>
   <section class="section">
     <div class="container">
       <div class="level">
@@ -18,7 +37,7 @@
         </div>
         <!--ポイント-->
         <div class="level-right">
-          <h2 class="subtitle">0pt</h2>
+          <h2 class="subtitle"><?php echo htmlspecialchars($point); ?>pt</h2>
         </div>
       </div>
 
