@@ -10,7 +10,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="admin_function/add_book_script.js" defer></script>
+    <script src="add_book_script.js" defer></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <div class="container">
             <h1 class="title">書籍の新規登録</h1>
 
-            <form action="admin_function/add_book_action.php" method="post" enctype="multipart/form-data">
+            <form action="add_book_action.php" method="post" enctype="multipart/form-data">
                 <div class="field">
                     <label class="label">タイトル：</label>
                     <div class="control">
