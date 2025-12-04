@@ -1,7 +1,6 @@
 <?php
 session_start();
 require 'db-connect.php';
-$uri = $_SESSION['uri'];
 
 // book_id 取得チェック
 if (!isset($_POST['book_id'])) {
@@ -18,7 +17,7 @@ $book_id = (int)$_POST['book_id'];
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['alert_msg'] = "ログインしてください";
     echo "<script>
-            window.location.href = '". $uri . "';   // 元の画面へ戻る
+            window.location.href = ../login-input.php'';   // 元の画面へ戻る
           </script>";
     exit;
 }
@@ -35,9 +34,7 @@ try {
     
     if($buy){
         $_SESSION['alert_msg'] = 'この商品は購入済みです。';
-        echo "<script>
-                window.location.href = '". $uri . "';   // 元の画面へ戻る
-            </script>";
+        header("Location: " . $_SERVER['HTTP_REFERER']);
         exit;
     }
 
@@ -73,7 +70,7 @@ try {
         $_SESSION['alert_msg'] = "カートに追加しました";
     }
 
-    echo "<script>window.location.href = '". $uri . "';   // 元の画面へ戻る</script>";
+    header("Location: " . $_SERVER['HTTP_REFERER']);
     exit;
 
 } catch (PDOException $e) {

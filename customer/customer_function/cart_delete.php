@@ -1,7 +1,6 @@
 <?php
 require 'db-connect.php';
 session_start();
-$uri = $_SESSION['uri'];
 
 if (!isset($_POST['cart_id'])) {
     echo '<script>
@@ -22,19 +21,11 @@ try {
 
     // JavaScript でアラートを出して cart.php に戻る
     $_SESSION['alert_msg'] = "削除しました。";
-    echo "
-    <script>
-        window.location.href = '". $uri ."';
-    </script>
-    ";
+    header("Location: " . $_SERVER['HTTP_REFERER']);
     exit;
 
 } catch (Exception $e) {
     $_SESSION['alert_msg'] = "エラーが発生により削除できませんでした。";
-    echo "
-    <script>
-        window.location.href = '". $uri ."';
-    </script>
-    ";
+    header("Location: " . $_SERVER['HTTP_REFERER']);
     exit;
 }
