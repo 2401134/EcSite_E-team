@@ -25,10 +25,8 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>試し読み</title>
 
-    <!-- Bulma -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
@@ -52,6 +50,14 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- ▼ DB の books を全てループ表示 -->
         <?php foreach ($books as $book): ?>
+
+        <?php
+        // 試し読み用 PDF が「準備中」の場合はスキップ
+        if ($book['sample'] === '../uploads/samples/preparation.pdf') {
+            continue;
+        }
+        ?>
+
         <div class="box">
             <div class="columns is-vcentered">
 
