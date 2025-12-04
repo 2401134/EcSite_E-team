@@ -17,7 +17,7 @@ $book = $sql->fetch();
 
 if (!$book) {
     $_SESSION['alert_msg'] = "本が存在しません。";
-    echo '<script>window.location.href = "../read.php";</script>';
+    echo '<script>window.location.href = "../bookshelf.php";</script>';
     exit;
 }
 
@@ -25,7 +25,7 @@ $book_pdf = '../' . $book['e_book'];
 
 if (!file_exists($book_pdf)) {
     $_SESSION['alert_msg'] = "ファイルが存在しません。";
-    echo '<script>window.location.href = "../read.php";</script>';
+    echo '<script>window.location.href = "../bookself.php";</script>';
     exit;
 }
 
