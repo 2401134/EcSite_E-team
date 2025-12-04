@@ -5,8 +5,8 @@ $pdo = new PDO($connect, USER, PASS);
 
 if (!isset($_SESSION['user_id'])) {
     // ゲストの場合はアラートを出してホームに戻す
+    $_SESSION['alert_msg'] = "ゲストはお気に入り機能が使えません。ログインしてください。";
     echo "<script>
-        alert('ゲストユーザーはお気に入り登録できません。ログインしてください。');
         window.location.href = '../customer_home.php';
     </script>";
     exit; // これ以上処理しない
