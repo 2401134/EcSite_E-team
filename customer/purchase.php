@@ -28,6 +28,13 @@ if ($_SESSION['buy'] === 0 && isset($_POST['book_id'])) {
 $pdo = new PDO($connect, USER, PASS);
 $user_id = $_SESSION['user_id'];
 
+// 所持ポイントを取得
+$point_sql = $pdo->prepare("SELECT point FROM users WHERE user_id = ?");
+$point_sql->execute([$user_id]);
+$point_row = $point_sql->fetch(PDO::FETCH_ASSOC);
+$my_point = $point_row ? (int)$point_row['point'] : 0;
+
+
 $buy_mode = $_SESSION['buy'];   // 1 = 全部購入, 0 = 1冊購入
 
 $books = [];
@@ -100,6 +107,14 @@ if ($buy_mode == 1) {
         echo "<script>alert('すでに購入済みのため購入できる本がありません'); history.back();</script>";
         exit;
     }
+    
+    $total_price = 0;
+    foreach ($books as $b) {
+        $total_price += (int)$b['price'];
+    }
+
+    // ポイントは購入金額を超えられないように調整
+    $max_use_point = min($my_point, $total_price);
 }
 ?>
 
@@ -109,9 +124,7 @@ if ($buy_mode == 1) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購入手続き</title>
-    <!-- Bulma -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -150,13 +163,36 @@ if ($buy_mode == 1) {
             </div>
             <?php endforeach; ?>
 
+            <div class="box has-background-light">
+                <p class="title is-6">ポイント利用</p>
+
+                <p><strong>所持ポイント：</strong> 
+                    <span class="has-text-info"><?php echo $my_point; ?> pt</span>
+                </p>
+
+                <form action="customer_function/purchase_buy.php" method="POST" class="mt-3">
+                    <div class="field">
+                        <label class="label">使用するポイント</label>
+                        <div class="control">
+                            <input 
+                                class="input" 
+                                type="number" 
+                                name="use_point" 
+                                min="0" 
+                                max="<?php echo $max_use_point; ?>" 
+                                placeholder="0～<?php echo $max_use_point; ?> の範囲で入力"
+                            >
+                        </div>
+                    </div>
+
+                    <button class="button is-primary is-medium mt-2">購入確定</button>
+                </form>
+            </div>
+
+            <!-- 決済方法に戻る -->
             <div class="buttons is-centered mt-4 ">
                 <form action="payment_method.php" method="POST">
                     <button class="button is-light is-medium">決済方法選択へ</button>
-                </form>
-
-                <form action="customer_function/purchase_buy.php" method="POST">
-                    <button class="button is-light is-medium">購入確定</button>
                 </form>
             </div>
      

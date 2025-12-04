@@ -2,34 +2,50 @@
 session_start();
 require '../db-connect.php';
 
-// --------------------------------------------------
-// 0. セッションチェック（最低限）
-// --------------------------------------------------
+// ▼ セッションチェック
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('ログインしてください'); location.href='../login.php';</script>";
+    exit;
+}
 
-// 購入モードが無い → 不正アクセス
+// ▼ purchase_process チェック
+if (
+    !isset($_SESSION['purchase_process']) ||
+    ($_SESSION['purchase_process'] != 1 && $_SESSION['purchase_process'] != 2)
+) {
+    echo "<script>alert('購入方法が不正です。'); history.back();</script>";
+    exit;
+}
+
+// ▼ buy モード（0 = 1冊, 1 = 全て購入）
 if (!isset($_SESSION['buy'])) {
-    echo "<script>alert('購入手続きが正しく行われていません。'); history.back();</script>";
+    echo "<script>alert('購入方法が指定されていません。'); history.back();</script>";
     exit;
 }
 
-// 個別購入なのに book_id が無い
-if ($_SESSION['buy'] == 0 && !isset($_SESSION['book_id'])) {
-    echo "<script>alert('購入対象の本が指定されていません。'); history.back();</script>";
-    exit;
-}
+$buy_mode = (int)$_SESSION['buy'];
+$user_id = $_SESSION['user_id'];
 
 $pdo = new PDO($connect, USER, PASS);
-$user_id = $_SESSION['user_id'];
-$buy_mode = $_SESSION['buy'];
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-// --------------------------------------------------
-// 1. 購入対象の本一覧を取得
-// --------------------------------------------------
+// ▼ 使用ポイント
+$use_point = isset($_POST['use_point']) ? (int)$_POST['use_point'] : 0;
+if ($use_point < 0) $use_point = 0;
+
+
+// ▼ ユーザーの所持ポイント取得
+$point_sql = $pdo->prepare("SELECT point FROM users WHERE user_id = ?");
+$point_sql->execute([$user_id]);
+$my_point = (int)$point_sql->fetchColumn();
+
+// ▼ 購入対象の本を取得
 $books = [];
+$total_price = 0;
 
 if ($buy_mode == 1) {
-    // ▼ カートの全てを購入
+    // ▼ カートから全購入
     $sql = $pdo->prepare("
         SELECT b.book_id, b.price
         FROM carts c
@@ -41,55 +57,104 @@ if ($buy_mode == 1) {
 
 } else {
     // ▼ 個別購入
-    $book_id = $_SESSION['book_id'];
+    if (!isset($_SESSION['book_id'])) {
+        echo "<script>alert('購入する本が指定されていません'); history.back();</script>";
+        exit;
+    }
+
+    $book_id = (int)$_SESSION['book_id'];
 
     $sql = $pdo->prepare("SELECT book_id, price FROM books WHERE book_id = ?");
     $sql->execute([$book_id]);
-    $book = $sql->fetch(PDO::FETCH_ASSOC);
+    $b = $sql->fetch(PDO::FETCH_ASSOC);
 
-    if ($book) {
-        $books[] = $book;
-    } else {
-        echo "<script>alert('購入対象の本が見つかりません'); history.back();</script>";
-        exit;
+    if ($b) {
+        $books[] = $b;
     }
 }
 
-
-// --------------------------------------------------
-// 2. purchases に登録（重複 book_id はスキップ）
-// --------------------------------------------------
-$insert = $pdo->prepare("
-    INSERT INTO purchases (user_id, book_id, price, purchase_date)
-    SELECT ?, ?, ?, NOW()
-    WHERE NOT EXISTS (
-        SELECT 1 FROM purchases 
-        WHERE user_id = ? AND book_id = ?
-    )
-");
-
+// ▼ 合計金額算出
 foreach ($books as $b) {
-    $insert->execute([
-        $user_id,
-        $b['book_id'],
-        $b['price'],
-        $user_id,
-        $b['book_id']
-    ]);
+    $total_price += (int)$b['price'];
 }
 
+// ▼ ポイント使用上限（購入金額 & 所持ポイント）
+$max_use_point = min($my_point, $total_price);
 
-// --------------------------------------------------
-// 3. カート購入の場合、cart_status を購入済みに更新
-// --------------------------------------------------
-if ($buy_mode == 1) {
-    $sql = $pdo->prepare("UPDATE carts SET cart_status = 1 WHERE user_id = ?");
-    $sql->execute([$user_id]);
+// ▼ バリデーション
+if ($use_point > $max_use_point) {
+    echo "<script>alert('使用ポイントが購入金額または所持ポイントを超えています'); history.back();</script>";
+    exit;
 }
 
+// ▼ 実際に支払う金額
+$final_payment = $total_price - $use_point;
 
-// --------------------------------------------------
-// 4. 完了画面へ遷移（purchase_complete.php）
-// --------------------------------------------------
-header("Location: ../purchase_complete.php");
-exit;
+
+// ▼ 購入済みチェック（同じ本の重複購入防止）
+$chk = $pdo->prepare("
+    SELECT book_id FROM purchases WHERE user_id = ?
+");
+$chk->execute([$user_id]);
+$already = array_column($chk->fetchAll(PDO::FETCH_ASSOC), "book_id");
+
+
+// ▼ 購入処理を開始（トランザクション）
+$pdo->beginTransaction();
+
+try {
+
+    // ▼ 購入履歴に追加
+    $now = date("Y-m-d H:i:s");
+    $insert = $pdo->prepare("
+        INSERT INTO purchases (user_id, book_id, purchase_date)
+        VALUES (?, ?, ?)
+    ");
+
+    foreach ($books as $b) {
+
+        // 購入済みはスキップ
+        if (in_array($b['book_id'], $already)) continue;
+
+        $insert->execute([
+            $user_id,
+            $b['book_id'],
+            $now
+        ]);
+    }
+
+    // ▼ ポイント更新（減算）
+    $update_point = $pdo->prepare("
+        UPDATE users SET point = point - ? WHERE user_id = ?
+    ");
+    $update_point->execute([$use_point, $user_id]);
+
+    // ▼  購入金額の1%ポイント付与
+    $add_point = floor($final_payment * 0.01);   // 小数切り捨て
+    $add_point_sql = $pdo->prepare("
+        UPDATE users SET point = point + ? WHERE user_id = ?
+    ");
+    $add_point_sql->execute([$add_point, $user_id]);
+
+    // ▼ カート購入の場合はカートから削除
+    if ($buy_mode == 1) {
+        $del = $pdo->prepare("DELETE FROM carts WHERE user_id = ? AND cart_status = 0");
+        $del->execute([$user_id]);
+    }
+
+    $pdo->commit();
+
+    echo "<script>
+        alert('購入が完了しました！');
+        location.href='../customer_home.php';
+    </script>";
+    exit;
+
+} catch (Exception $e) {
+
+    $pdo->rollBack();
+    echo "<script>alert('購入処理でエラーが発生しました'); history.back();</script>";
+    exit;
+}
+
+?>
