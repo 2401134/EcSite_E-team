@@ -43,9 +43,9 @@
           <div class="column is-narrow has-text-right">
             <p><?= htmlspecialchars($book['price']) ?>円</p>
             <p><?= date('Y-m-d', strtotime($book['purchase_date'])) ?>に購入</p>
-            
+
             <!-- 📖 読むボタン（直接開く） -->
-            <a href="<?= $row['file_path'] ?>" target="_blank">
+            <a href="<?= $book['file_path'] ?>" target="_blank">
               <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
               <button type="submit" class="button is-link is-light">
                   <span class="icon"><i class="fas fa-book-open"></i></span>
