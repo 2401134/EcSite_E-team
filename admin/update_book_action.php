@@ -93,7 +93,46 @@ $log_stmt->bindValue(':admin_id', $admin_id, PDO::PARAM_INT);
 $log_stmt->bindValue(':target_id', $book_id, PDO::PARAM_INT);
 $log_stmt->execute();
 */
-// ---- 完了メッセージ ----
-echo "更新が完了しました！<br>";
-echo "ログも記録しました。<br>";
-echo '<a href="edit_book.php?id=' . $book_id . '">戻る</a>';
+?>
+
+<!--完了通知-->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>更新完了</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+
+<?php require 'menu.php'?>
+
+<section class="section">
+  <div class="container">
+
+    <div class="box has-text-centered">
+
+      <h1 class="title is-4 has-text-success">✅ 更新が完了しました！</h1>
+
+      <p class="mb-4">書籍情報の更新が正常に完了しました。</p>
+
+      <div class="buttons is-centered">
+        <a href="edit_book.php?id=<?= $book_id ?>" class="button is-link">
+          編集画面に戻る
+        </a>
+
+        <a href="book_list.php" class="button is-dark">
+          書籍一覧へ
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+</body>
+</html>
