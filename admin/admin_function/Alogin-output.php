@@ -38,6 +38,7 @@ if (!empty($employee_id) && !empty($admin_password)) {
 
         if ($input_hashed === $admin['admin_password']) {
             $_SESSION['admin_id'] = $admin['admin_id'];
+            $_SESSION['super_admin'] = $admin['super_admin'];
             header("Location: ../admin_home.php");
             exit;
         } else {
