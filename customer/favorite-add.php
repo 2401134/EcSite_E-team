@@ -1,5 +1,11 @@
 <?php require 'customer_function/favorite_controller.php' ;
-$favorites = getFavoriteList($pdo, $_SESSION['user_id'] ?? null );
+
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('ログインしてください');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+    echo "<script>history.back()</script>";
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
