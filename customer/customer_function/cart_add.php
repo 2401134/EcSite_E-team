@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
+$uri = $_SESSION['uri'];
 
 // book_id 取得チェック
 if (!isset($_POST['book_id'])) {
@@ -17,7 +18,7 @@ $book_id = (int)$_POST['book_id'];
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['alert_msg'] = "ログインしてください";
     echo "<script>
-            window.location.href = '../tryread.php';   // 元の画面へ戻る
+            window.location.href = '". $uri . "';   // 元の画面へ戻る
           </script>";
     exit;
 }
@@ -26,6 +27,19 @@ $user_id = (int)$_SESSION['user_id'];
 
 try {
     $pdo = new PDO($connect, USER, PASS);
+
+    $sql = "SELECT * FROM purchases WHERE user_id = ? AND book_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$user_id, $book_id]);
+    $buy = $stmt->fetch();
+    
+    if($buy){
+        $_SESSION['alert_msg'] = 'この商品は購入済みです。';
+        echo "<script>
+                window.location.href = '". $uri . "';   // 元の画面へ戻る
+            </script>";
+        exit;
+    }
 
     // ▼ 今のユーザー＆本の組み合わせが carts に存在するか確認
     $sql = "SELECT cart_id, cart_status FROM carts 
@@ -59,10 +73,7 @@ try {
         $_SESSION['alert_msg'] = "カートに追加しました";
     }
 
-    // 試し読みへ戻る
-    echo "<script>
-        window.location.href = '../tryread.php';
-        </script>";
+    echo "<script>window.location.href = '". $uri . "';   // 元の画面へ戻る</script>";
     exit;
 
 } catch (PDOException $e) {

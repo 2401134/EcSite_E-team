@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
+$_SESSION['uri'] = $_SERVER['REQUEST_URI'];
 ?>
 
 <?php
