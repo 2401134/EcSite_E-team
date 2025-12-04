@@ -48,7 +48,7 @@
         <div class="buttons mt-2 is-flex is-justify-content-flex-end">
 
     <!-- 📖 読むボタン（直接開く） -->
-    <form action="read.php" method="POST" target="_blank">
+    <form action="customer_function/read.php" method="POST" target="_blank">
     <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
     <button type="submit" class="button is-link is-light">
         <span class="icon"><i class="fas fa-book-open"></i></span>
