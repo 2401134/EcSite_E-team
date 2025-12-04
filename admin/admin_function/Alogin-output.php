@@ -12,7 +12,7 @@ if (!empty($employee_id) && !empty($admin_password)) {
         $sql->execute([$employee_id]);
         $admin = $sql->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        $_SESSION['alert_msg'] = 'エラー';
+        $_SESSION['alert_msg'] = $e;
         echo "
             <script>
             window.location.href = '../Alogin-input.php';
@@ -23,7 +23,7 @@ if (!empty($employee_id) && !empty($admin_password)) {
 
     if ($admin) {
         if($admin['admin_status'] === 1){
-            $_SESSION['alert_msg'] = 'IDかパスワードが違います';
+            $_SESSION['alert_msg'] = "IDかパスワードが違います。1";
             echo "
             <script>
             window.location.href = '../Alogin-input.php';
@@ -38,11 +38,10 @@ if (!empty($employee_id) && !empty($admin_password)) {
 
         if ($input_hashed === $admin['admin_password']) {
             $_SESSION['admin_id'] = $admin['admin_id'];
-            $_SESSION['super_admin'] = $admin['super_admin'];
-            header("Location: ../super_admin_home.php");
+            header("Location: ../admin_home.php");
             exit;
         } else {
-            $_SESSION['alert_msg'] = 'IDかパスワードが違います';
+            $_SESSION['alert_msg'] = "IDかパスワードが違います。2";
             echo "
             <script>
             window.location.href = '../Alogin-input.php';
@@ -51,7 +50,7 @@ if (!empty($employee_id) && !empty($admin_password)) {
             exit;
         }
     } else {
-        $_SESSION['alert_msg'] = 'IDかパスワードが違います';
+        $_SESSION['alert_msg'] = "IDかパスワードが違います。3";
         echo "
             <script>
             window.location.href = '../Alogin-input.php';
@@ -60,7 +59,7 @@ if (!empty($employee_id) && !empty($admin_password)) {
         exit;
     }
 } else {
-    $_SESSION['alert_msg'] = 'IDかパスワードが違います';
+    $_SESSION['alert_msg'] = "入力してください。";
     echo "
         <script>
         window.location.href = '../Alogin-input.php';

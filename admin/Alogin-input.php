@@ -22,7 +22,7 @@ if (isset($_SESSION["alert_msg"])) {
     <form action="admin_function/Alogin-output.php" method="post" style="width: 300px; margin: 0 auto; padding: 35px; border: 1px solid #ccc; border-radius: 10px;">
         
         <label for="id">社員ID</label><br>
-        <input type="text" id="id" name="admin_id" style="width: 100%; padding: 8px; margin-bottom: 15px;border-radius: 5px;"><br>
+        <input type="text" id="id" name="employee_id" style="width: 100%; padding: 8px; margin-bottom: 15px;border-radius: 5px;"><br>
         
         <label for="admin_password">パスワード</label><br>
         <input type="password" id="password" name="admin_password" style="width: 100%; padding: 8px; margin-bottom: 20px;border-radius: 5px;"><br>
