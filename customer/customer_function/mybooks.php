@@ -4,19 +4,18 @@ require 'db-connect.php';
 
 $pdo = new PDO($connect, USER, PASS);
 
-if (!$user_id) {
-    // ゲストの場合はアラートを出してホームに戻す
-    echo "<script>
-        alert('ゲストユーザーはお気に入り登録できません。ログインしてください。');
-        window.location.href = 'customer_home.php';
-    </script>";
-    exit; // これ以上処理しない
+// ログインしていない場合はログイン画面へ
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('ログインしてください');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+    echo "<script>history.back()</script>";
+    exit();
 }
 
-// 🔹ログインユーザーID
+// ログインユーザーID
 $user_id = $_SESSION['user_id'] ?? null;
 
-// 🔹JOIN で購入書籍一覧を取得
+// JOIN で購入書籍一覧を取得
 $sql = "SELECT 
           b.book_id,
           b.title,
