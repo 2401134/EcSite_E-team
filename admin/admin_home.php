@@ -1,4 +1,10 @@
-<?php session_start() ?>
+<?php
+session_start();
+if (!isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+} 
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
