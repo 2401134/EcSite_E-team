@@ -1,5 +1,5 @@
 <?php
-session_start(); // ★ 追加：セッション開始
+session_start();
 
 require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
