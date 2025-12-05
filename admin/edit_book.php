@@ -221,7 +221,7 @@ if (!$book) {
 
             <!--ホームに戻る-->
             <div class="has-text-right mt-5">
-            <form action="admin_home.php" method="POST">
+            <form action="super_admin_home.php" method="POST">
                 <button class="button is-dark">
                 <span class="icon"><i class="fas fa-home"></i></span>
                 <span>ホームに戻る</span>

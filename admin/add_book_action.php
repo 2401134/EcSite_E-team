@@ -8,8 +8,15 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // ---- セッションチェック ----
 if (!isset($_SESSION['admin_id'])) {
-    echo "エラー：管理者としてログインしていません。<br>";
-    echo '<a href="Alogin-input.php">ログイン画面へ</a>';
+    http_response_code(404);
+    exit;
+}
+
+if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
+    echo '<script>
+          alert("総合管理者の権限がありません");
+          history.back();
+          </script>';
     exit;
 }
 $admin_id = $_SESSION['admin_id'];
