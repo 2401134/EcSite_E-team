@@ -1,4 +1,12 @@
-<?php require 'admin_function/logs.php' ?>
+<?php
+require 'admin_function/logs.php';
+
+if (!empty($_SESSION['alert_msg'])) {
+    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="ja">

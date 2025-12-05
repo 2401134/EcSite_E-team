@@ -1,17 +1,28 @@
 <?php
 session_start(); // ★ 追加：セッション開始
 
+if (!empty($_SESSION['alert_msg'])) {
+    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+}
+
+if (!isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
+if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
+    echo '<script>
+          alert("総合管理者の権限がありません");
+          history.back();
+          </script>';
+    exit;
+}
+
 require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
-// ---- セッションチェック ----
-if (!isset($_SESSION['admin_id'])) {
-    echo "エラー：管理者としてログインしていません。<br>";
-    echo '<a href="Alogin-input.php">ログイン画面へ</a>';
-    exit;
-}
 $admin_id = $_SESSION['admin_id'];
 
 
