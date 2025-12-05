@@ -118,10 +118,10 @@ $cart_items = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- お気に入り -->
                 <form action="customer_function/favarit.php" method="POST" style="display:inline;">
-                  <input type="hidden" name="book_id" value="<?= $book_id ?>">
+                  <input type="hidden" name="book_id" value="<?= $item['book_id'] ?>">
                   <button type="submit" class="button is-white is-rounded" title="お気に入り登録">
                     <span class="icon">
-                      <i class='far fa-star' ?>"></i>
+                      <i class='far fa-star'></i>
                     </span>
                   </button>
                 </form>
