@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_id'])) {
           <!-- 左：表紙 -->
           <div class="column is-narrow">
             <figure class="image is-3by4" style="width: 80px; border: 1px solid #4a4a4a;">
-              <img src="<?= htmlspecialchars($book['sample'] ?? 'images/sample.jpg') ?>" alt="小説の表紙">
+              <img src="<?= htmlspecialchars($book['book_image'] ?? 'images/sample.jpg') ?>" alt="小説の表紙">
             </figure>
           </div>
 
