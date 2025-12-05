@@ -14,13 +14,13 @@
     }
 
     // 🔹 お気に入り一覧取得
-    function getFavorites($pdo,$user_id){
-    $fav_sql = "SELECT book_id FROM favorites WHERE user_id = ?";
+    function getFavorites($pdo, $user_id){
+    $fav_sql = "SELECT book_id FROM favorites WHERE user_id = ?  AND favorite_status = 0";  
     $fav_stmt = $pdo->prepare($fav_sql);
     $fav_stmt->execute([$user_id]);
-    $favorites =array_map('intval', $fav_stmt->fetchAll(PDO::FETCH_COLUMN));
-     return $favorites;
-    }
+    return array_map('intval', $fav_stmt->fetchAll(PDO::FETCH_COLUMN));
+}
+
     $books=getBooks($pdo);
     $favorites=getFavorites($pdo,$user_id);
 ?>
