@@ -6,14 +6,14 @@ $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // ---- セッションチェック ----
-/*if (!isset($_SESSION['admin_id'])) {
+if (!isset($_SESSION['admin_id'])) {
     echo "エラー：管理者としてログインしていません。<br>";
     echo '<a href="../Alogin-input.php">ログイン画面へ</a>';
     exit;
 }
 
 $admin_id = $_SESSION['admin_id'];
-*/
+
 // ---- 入力受け取り ----
 $book_id  = $_POST['book_id'];
 $title    = $_POST['title'];
@@ -83,7 +83,7 @@ $stmt->bindValue(':book_id', $book_id, PDO::PARAM_INT);
 $stmt->execute();
 
 // ---- 管理者ログへ記録 ----
-/*$log_sql = "INSERT INTO admin_logs
+$log_sql = "INSERT INTO admin_logs
             (admin_id, target_table, target_id, admin_action, log_date)
             VALUES
             (:admin_id, 'books', :target_id, '書籍情報を更新', NOW())";
@@ -92,7 +92,7 @@ $log_stmt = $pdo->prepare($log_sql);
 $log_stmt->bindValue(':admin_id', $admin_id, PDO::PARAM_INT);
 $log_stmt->bindValue(':target_id', $book_id, PDO::PARAM_INT);
 $log_stmt->execute();
-*/
+
 ?>
 
 <!--完了通知-->
@@ -113,7 +113,7 @@ $log_stmt->execute();
 
     <div class="box has-text-centered">
 
-      <h1 class="title is-4 has-text-success">✅ 更新が完了しました！</h1>
+      <h1 class="title is-4 has-text-success"> 更新が完了しました！</h1>
 
       <p class="mb-4">書籍情報の更新が正常に完了しました。</p>
 

@@ -1,7 +1,19 @@
 <?php
+session_start(); // ★ 追加：セッション開始
+
 require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+// ---- セッションチェック ----
+if (!isset($_SESSION['admin_id'])) {
+    echo "エラー：管理者としてログインしていません。<br>";
+    echo '<a href="Alogin-input.php">ログイン画面へ</a>';
+    exit;
+}
+$admin_id = $_SESSION['admin_id'];
+
 
 // ---- 入力 ----
 $title    = trim($_POST['title'] ?? '');
@@ -11,7 +23,7 @@ $price    = $_POST['price'] ?? 0;
 $synopsis = trim($_POST['synopsis'] ?? '');
 
 
-// ---- 必須チェック（サンプル以外）----
+// ---- 必須チェック ----
 $errors = [];
 
 if ($title === '')     $errors[] = "タイトルは必須です。";
@@ -20,7 +32,6 @@ if ($genre === '')     $errors[] = "ジャンルは必須です。";
 if ($price === '' || !is_numeric($price))  $errors[] = "価格は必須です。";
 if ($synopsis === '')  $errors[] = "あらすじは必須です。";
 
-// 表紙・電子書籍ファイルの必須チェック
 if ($_FILES['book_image']['error'] === UPLOAD_ERR_NO_FILE) 
     $errors[] = "表紙画像は必須です。";
 
@@ -53,11 +64,11 @@ function uploadFile($file, $dir) {
 }
 
 
-// 正しいキー名に修正！（重要）
+// 正しいキー名（重要）
 $book_image_path = uploadFile($_FILES['book_image'], '../uploads/book_images');
 $ebook_path      = uploadFile($_FILES['book_e-book'], '../uploads/ebooks');
 
-// サンプルは任意 → アップされてなければ固定の準備中PDF
+// サンプル PDF
 if ($_FILES['book_sample']['error'] === UPLOAD_ERR_NO_FILE) {
     $sample_path = '../uploads/samples/preparation.pdf';
 } else {
@@ -83,6 +94,23 @@ $stmt->bindValue(':sample', $sample_path);
 $stmt->bindValue(':e_book', $ebook_path);
 
 $stmt->execute();
+
+
+// ---- 登録した book_id を取得 ----
+$book_id = $pdo->lastInsertId();
+
+
+// ---- 管理者ログへ記録 ----
+$log_sql = "INSERT INTO admin_logs
+(admin_id, target_table, target_id, admin_action, log_date)
+VALUES
+(:admin_id, 'books', :target_id, '書籍情報を登録', NOW())";
+
+$log_stmt = $pdo->prepare($log_sql);
+$log_stmt->bindValue(':admin_id', $admin_id, PDO::PARAM_INT);
+$log_stmt->bindValue(':target_id', $book_id, PDO::PARAM_INT);
+$log_stmt->execute();
+
 ?>
 
 <!--完了通知-->
@@ -103,7 +131,7 @@ $stmt->execute();
 
     <div class="box has-text-centered">
 
-      <h1 class="title is-4 has-text-success">✅ 登録が完了しました！</h1>
+      <h1 class="title is-4 has-text-success"> 登録が完了しました！</h1>
 
       <p class="mb-4">書籍の登録が正常に完了しました。</p>
 
@@ -122,7 +150,5 @@ $stmt->execute();
   </div>
 </section>
 
-
-
 </body>
-</html>;
+</html>
