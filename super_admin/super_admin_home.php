@@ -24,7 +24,6 @@ if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-  <?php require 'header.php'?>
     <?php require 'menu.php'?>
       <section class="section">
     <div class="container">
