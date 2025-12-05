@@ -71,7 +71,7 @@ try {
                 <div class="history_browse is-flex is-justify-content-flex-end">
 
                     <!-- 購入履歴 -->
-                    <form action="purchase_history.php" method="post" class="mr-4">
+                    <form action="purchase_history.php" method="get" class="mr-4">
                         <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
                         <button type="submit" class="button is-normal is-light">
                             <span class="icon"><i class="fas fa-shopping-cart"></i></span>
