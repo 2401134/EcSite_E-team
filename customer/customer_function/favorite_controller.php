@@ -25,7 +25,7 @@ function getFavoriteList($pdo, $user_id) {
                 AND p.user_id = f.user_id
             WHERE f.user_id = :user_id
               AND f.favorite_status = 0
-              AND b.public_status = 0
+              AND b.book_status = 0
             ORDER BY f.favorite_id DESC";
 
     $stmt = $pdo->prepare($sql);
