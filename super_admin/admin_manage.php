@@ -100,43 +100,45 @@ try {
                     <div class="history_browse is-flex is-justify-content-flex-end">
 
                     <!-- super_admin 権限ボタン -->
-                        <form action="super_admin_function/authority_super.php" method="post" class="mr-4">
-                            <input type="hidden" name="admin_id" value="<?php echo $admin['admin_id']; ?>">
+                        <?php if($admin['admin_id'] != $_SESSION['admin_id']): ?>
+                            <form action="super_admin_function/authority_super.php" method="post" class="mr-4">
+                                <input type="hidden" name="admin_id" value="<?php echo $admin['admin_id']; ?>">
 
-                            <?php if ($admin['super_admin'] == 0): ?>
-                                <!-- super_admin = 0 → すでに総合管理者なので「削除」ボタン -->
-                                <button type="submit" class="button is-danger is-light is-rounded">
-                                    <span class="icon is-normal"><i class="fas fa-trash"></i></span>
-                                    <span>総合管理者権限を削除</span>
-                                </button>
-                            <?php else: ?>
-                                <!-- super_admin = 1 → 総合管理者権限なし → 「付与」ボタン -->
-                                <button type="submit" class="button is-primary is-light is-rounded">
-                                    <span class="icon is-normal"><i class="fas fa-plus"></i></span>
-                                    <span>総合管理者権限を付与</span>
-                                </button>
-                            <?php endif; ?>
-                        </form>
+                                <?php if ($admin['super_admin'] == 0): ?>
+                                    <!-- super_admin = 0 → すでに総合管理者なので「削除」ボタン -->
+                                    <button type="submit" class="button is-danger is-light is-rounded">
+                                        <span class="icon is-normal"><i class="fas fa-trash"></i></span>
+                                        <span>総合管理者権限を削除</span>
+                                    </button>
+                                <?php else: ?>
+                                    <!-- super_admin = 1 → 総合管理者権限なし → 「付与」ボタン -->
+                                    <button type="submit" class="button is-primary is-light is-rounded">
+                                        <span class="icon is-normal"><i class="fas fa-plus"></i></span>
+                                        <span>総合管理者権限を付与</span>
+                                    </button>
+                                <?php endif; ?>
+                            </form>
 
 
-                        <!-- admin_status 権限ボタン -->
-                        <form action="super_admin_function/authority_admin.php" method="post" class="mr-4">
-                            <input type="hidden" name="admin_id" value="<?php echo $admin['admin_id']; ?>">
+                            <!-- admin_status 権限ボタン -->
+                            <form action="super_admin_function/authority_admin.php" method="post" class="mr-4">
+                                <input type="hidden" name="admin_id" value="<?php echo $admin['admin_id']; ?>">
 
-                            <?php if ($admin['admin_status'] == 0): ?>
-                                <!-- admin_status = 0 → 管理者権限あり → 「削除」 -->
-                                <button type="submit" class="button is-danger is-light is-rounded">
-                                    <span class="icon is-normal"><i class="fas fa-trash"></i></span>
-                                    <span>管理者権限を削除</span>
-                                </button>
-                            <?php else: ?>
-                                <!-- admin_status = 1 → 権限なし → 「付与」 -->
-                                <button type="submit" class="button is-primary is-light is-rounded">
-                                    <span class="icon is-normal"><i class="fas fa-plus"></i></span>
-                                    <span>管理者権限を付与</span>
-                                </button>
-                            <?php endif; ?>
-                        </form>
+                                <?php if ($admin['admin_status'] == 0): ?>
+                                    <!-- admin_status = 0 → 管理者権限あり → 「削除」 -->
+                                    <button type="submit" class="button is-danger is-light is-rounded">
+                                        <span class="icon is-normal"><i class="fas fa-trash"></i></span>
+                                        <span>管理者権限を削除</span>
+                                    </button>
+                                <?php else: ?>
+                                    <!-- admin_status = 1 → 権限なし → 「付与」 -->
+                                    <button type="submit" class="button is-primary is-light is-rounded">
+                                        <span class="icon is-normal"><i class="fas fa-plus"></i></span>
+                                        <span>管理者権限を付与</span>
+                                    </button>
+                                <?php endif; ?>
+                            </form>
+                        <?php endif; ?>
 
                     </div>
                 </div>
