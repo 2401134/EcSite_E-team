@@ -19,7 +19,8 @@ if (
 
 // ▼ buy モード（0 = 1冊, 1 = 全購入）
 if (!isset($_SESSION['buy'])) {
-    echo "<script>alert('購入方法が指定されていません。'); history.back();</script>";
+    $_SESSION['alert_msg'] = '不正なアクセスです。';
+    echo "<script>history.back();</script>";
     exit;
 }
 
@@ -115,6 +116,23 @@ try {
             $user_id,
             $b['book_id'],
             $b['price'],
+            $now
+        ]);
+
+        $log = $pdo->prepare("
+        INSERT INTO user_logs (user_id, target_table, target_id, user_action, log_date)
+        VALUES (?, ?, ?, ?, ?)
+        ");
+
+        $action_text = ($buy_mode == 1)
+            ? "購入(カート購入)"
+            : "購入(個別購入)";
+
+        $log->execute([
+            $user_id,
+            "purchases",
+            $b['book_id'],
+            $action_text,
             $now
         ]);
     }

@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
 session_unset();
 
 $params = session_get_cookie_params();
