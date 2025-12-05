@@ -1,22 +1,22 @@
 <?php
 session_start();
-require 'db-connect.php';
+require 'db-connect.php'; // DB接続情報
 
 $pdo = new PDO($connect, USER, PASS);
 
+// ログインユーザーID
 $user_id = $_SESSION['user_id'] ?? null;
 
-// モデルからお気に入り一覧取得
-$favorites = getFavoriteList($pdo, $user_id);
-
+// お気に入り一覧取得
 function getFavoriteList($pdo, $user_id) {
+    if (!$user_id) return []; // 未ログインなら空配列
+
     $sql = "SELECT 
                 b.book_id, 
                 b.title, 
                 b.synopsis, 
                 b.sample,
                 b.price,
-                b.book_image,
                 p.purchase_date
             FROM favorites f
             JOIN books b ON f.book_id = b.book_id
@@ -33,5 +33,4 @@ function getFavoriteList($pdo, $user_id) {
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 ?>
