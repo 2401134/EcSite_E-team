@@ -121,7 +121,7 @@ $cart_items = $sql->fetchAll(PDO::FETCH_ASSOC);
                   <input type="hidden" name="book_id" value="<?= $book_id ?>">
                   <button type="submit" class="button is-white is-rounded" title="お気に入り登録">
                     <span class="icon">
-                      <i class="<?= $is_fav ?'far fa-star has-text-dark':'far fa-star' ?>"></i>
+                      <i class='far fa-star' ?>"></i>
                     </span>
                   </button>
                 </form>
