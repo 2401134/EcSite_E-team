@@ -5,7 +5,7 @@ if (!isset($_SESSION['user_id'])) {
     unset($_SESSION['alert_msg']); // 1回だけ出す
     echo "<script>history.back()</script>";
     exit();
-}
+}$favorites = getFavoriteList($pdo, $user_id);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
