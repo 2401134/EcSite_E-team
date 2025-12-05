@@ -47,11 +47,10 @@ try {
     ]);
 
     //admin_logsに追加
-    $admin_id = $pdo->prepare("SELECT admin_id FROM admins WHERE employee_id = ?");
-    $admin_id->execute([$_SESSION['employee_id']]);//操作している管理者ID
+    $admin_id = $_SESSION['admin_id']; //操作している管理者ID
 
     $new_admin = $pdo->prepare("SELECT admin_id FROM admins WHERE employee_id = ?");
-    $new_admin->execute([$employee_id]);//新しく追加された管理者ID
+    $new_admin->execute([$employee_id]); //新しく追加された管理者ID
 
     $sql = "INSERT INTO admin_logs 
         (admin_id, target_table, target_id, admin_action, log_date)
