@@ -46,6 +46,26 @@ try {
         $employee_id
     ]);
 
+    //admin_logsに追加
+    $admin_id = $pdo->prepare("SELECT admin_id FROM admins WHERE employee_id = ?");
+    $admin_id->execute([$_SESSION['employee_id']]);//操作している管理者ID
+
+    $new_admin = $pdo->prepare("SELECT admin_id FROM admins WHERE employee_id = ?");
+    $new_admin->execute([$employee_id]);//新しく追加された管理者ID
+
+    $sql = "INSERT INTO admin_logs 
+        (admin_id, target_table, target_id, admin_action, log_date)
+        VALUES 
+        ($)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        $admin_id,
+        "admins",
+        $new_admin,
+        "新規管理者の追加",
+        now()
+    ])
+
     // 登録成功 → ホームへ移動
     $_SESSION['alert_msg'] = "登録しました";
     header("Location: ../admin_manage.php");
