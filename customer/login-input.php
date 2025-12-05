@@ -44,5 +44,11 @@ if (isset($_SESSION["alert_msg"])) {
         </a>
     </div>
 
+    <div style="width: 300px; margin: 20px auto 0;">
+       <a href="customer_home.php" style="display: block; width: 100%; padding: 12px; background-color: #555; color: white; text-align: center; text-decoration: none; border-radius: 5px;">
+            ホームに戻る
+        </a>
+    </div>
+
 </body>
 </html>
