@@ -102,8 +102,8 @@ try {
     $now = date("Y-m-d H:i:s");
 
     $insert = $pdo->prepare("
-        INSERT INTO purchases (user_id, book_id, purchase_date)
-        VALUES (?, ?, ?)
+        INSERT INTO purchases (user_id, book_id, price, purchase_date)
+        VALUES (?, ?, ?, ?)
     ");
 
     foreach ($books as $b) {
@@ -114,6 +114,7 @@ try {
         $insert->execute([
             $user_id,
             $b['book_id'],
+            $b['price'],
             $now
         ]);
     }
