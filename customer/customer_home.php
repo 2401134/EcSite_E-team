@@ -54,7 +54,7 @@ if (!empty($_SESSION['alert_msg'])) {
               <div class="level-right">
 
               <!--カート追加-->
-                <form action="customer_function/cart_add.php" method="GET" style="margin-top:10px;">
+                <form action="customer_function/cart_add.php" method="POST" style="margin-top:10px;">
                   <input type="hidden" name="book_id" value="<?= htmlspecialchars($row['book_id']) ?>">
                   <button type="submit" class="button is-white is-rounded" title="カート追加">
                       <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
