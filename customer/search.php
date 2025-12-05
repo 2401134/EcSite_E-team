@@ -199,6 +199,14 @@ $favorites = [];
                       </button>
                     </form>
 
+                    <!-- カート追加 -->
+                    <form action="customer_function/cart_add.php" method="POST" style="display:inline; margin-left:5px;">
+                      <input type="hidden" name="book_id" value="<?= htmlspecialchars($row['book_id']) ?>">
+                      <button type="submit" class="button is-white is-rounded" title="カート追加">
+                        <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
+                      </button>
+                    </form>
+
                   </div>
                 </div>
               </div>
