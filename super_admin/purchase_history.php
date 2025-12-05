@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-<?php require 'menu.php'?>
-    <section class="section">
+        <?php require 'menu.php'?>
+        <section class="section">
         <div class="container">
             <h1 class="title is-left">このユーザーの購入履歴</h1>
             <div class="box">
@@ -34,15 +34,7 @@
                     <div class="has-text-weight-bold mr-2">〇〇〇〇円</div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- ホームに戻る -->
-    <div class="has-text-right mt-5">
-        <a href="super_admin_home.php" class="button is-black">
-        <span class="icon"><i class="fas fa-home"></i></span>
-        <span>ホームに戻る</span>
-        </a>
-    </div>
+            </div>
+            </div>
 </body>
 </html>

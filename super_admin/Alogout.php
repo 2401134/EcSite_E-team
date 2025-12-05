@@ -11,6 +11,7 @@ setcookie(session_name(), '', time() - 42000,
 
 session_destroy();
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -75,7 +76,7 @@ session_destroy();
             ログアウトしました。
         </p>
 
-        <a href="../admin/Alogin-input.php" class="re-login-btn">
+        <a href="Alogin-input.php" class="re-login-btn">
             再ログイン
         </a>
     </div>

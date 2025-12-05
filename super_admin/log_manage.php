@@ -1,4 +1,4 @@
-<?php require 'super_admin_function/logs.php' ?>
+<?php require 'admin_function/logs.php' ?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -75,7 +75,7 @@
         </div>
         <!--ホームに戻る-->
         <div class="has-text-right mt-5">
-            <form action="super_admin_home.php" method="POST">
+            <form action="admin_home.php" method="POST">
                 <button class="button is-dark">
                     <span class="icon"><i class="fas fa-home"></i></span>
                     <span>ホームに戻る</span>

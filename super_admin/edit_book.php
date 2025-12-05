@@ -30,13 +30,11 @@ if (!$book) {
 <head>
 <meta charset="UTF-8">
 <title>書籍編集</title>
-<!-- Bulma -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-<script src="admin_function/edit_book_script.js" defer></script>
+<script src="edit_book_script.js" defer></script>
 </head>
 <body>
 
@@ -113,7 +111,9 @@ if (!$book) {
                     <?php endif; ?>
                 </div>
 
-                <div class="field">
+                <br>
+
+                <div class="field mt-6">
                     <label class="label">新しい表紙画像（変更する場合のみ）</label>
                     <div class="file has-name is-fullwidth">
                         <label class="file-label">
@@ -221,7 +221,7 @@ if (!$book) {
 
             <!--ホームに戻る-->
             <div class="has-text-right mt-5">
-            <form action="super_admin_home.php" method="POST">
+            <form action="admin_home.php" method="POST">
                 <button class="button is-dark">
                 <span class="icon"><i class="fas fa-home"></i></span>
                 <span>ホームに戻る</span>
