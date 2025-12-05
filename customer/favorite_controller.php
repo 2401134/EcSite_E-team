@@ -17,6 +17,7 @@ function getFavoriteList($pdo, $user_id) {
                 b.synopsis, 
                 b.sample,
                 b.price,
+                b.book_image
                 p.purchase_date
             FROM favorites f
             JOIN books b ON f.book_id = b.book_id
