@@ -70,6 +70,12 @@ if ($buy_mode == 1) {
         exit;
     }
 
+    $total_price = 0;
+    foreach ($books as $b) {
+        $total_price += (int)$b['price'];
+    }
+    $max_use_point = min($my_point, $total_price);
+
 } else {
     // 個別購入 → セッションの book_id から 1冊取得
     if (!isset($_SESSION['book_id'])) {
