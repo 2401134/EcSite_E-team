@@ -96,10 +96,13 @@ require 'customer_function/review1_function.php';
 
             <!-- 通報ボタン -->
             <div class="review-report">
-              <button class="button is-light is-normal is-rounded">
-                <span class="icon"><i class="fas fa-exclamation-triangle"></i></span>
-              </button>
-              <p><span class="is-size-6">通報</span></p>
+              <form method="POST" action="customer_function/review1_function.php" onsubmit="return confirm('このレビューを通報しますか？');">
+                  <input type="hidden" name="report_review_id" value="<?= htmlspecialchars($review['review_id']) ?>">
+                  <button class="button is-light is-normal is-rounded">
+                      <span class="icon"><i class="fas fa-exclamation-triangle"></i></span>
+                  </button>
+              </form>
+              <p class="is-size-6">通報</p>
               <p class="is-size-7 mt-1">ユーザーID: <?= htmlspecialchars($review['user_id']) ?></p>
             </div>
 
