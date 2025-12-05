@@ -26,7 +26,7 @@ $user_id = $_GET['user_id'];
 $pdo = new PDO($connect, USER, PASS);
 
 // 購入履歴取得
-$sql = "SELECT p.*, b.title, b.book_summary, b.book_image
+$sql = "SELECT p.*, b.title, b.synopsis, b.book_image
         FROM purchases p
         JOIN books b ON p.book_id = b.book_id
         WHERE p.user_id = ?
@@ -75,8 +75,8 @@ $history = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <!-- 中央：本の情報 -->
                 <div class="column">
-                    <p class="title is-6"><?= htmlspecialchars($row['book_title'], ENT_QUOTES) ?></p>
-                    <p class="subtitle is-7"><?= htmlspecialchars($row['book_summary'], ENT_QUOTES) ?></p>
+                    <p class="title is-6"><?= htmlspecialchars($row['title'], ENT_QUOTES) ?></p>
+                    <p class="subtitle is-7"><?= htmlspecialchars($row['synopsis'], ENT_QUOTES) ?></p>
                 </div>
 
                 <!-- 右：価格・日時 -->

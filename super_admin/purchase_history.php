@@ -84,8 +84,8 @@ $history = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <!-- 中央：本の情報 -->
                 <div class="column">
-                    <p class="title is-6"><?= htmlspecialchars($row['book_title'], ENT_QUOTES) ?></p>
-                    <p class="subtitle is-7"><?= htmlspecialchars($row['book_summary'], ENT_QUOTES) ?></p>
+                    <p class="title is-6"><?= htmlspecialchars($row['title'], ENT_QUOTES) ?></p>
+                    <p class="subtitle is-7"><?= htmlspecialchars($row['synopsis'], ENT_QUOTES) ?></p>
                 </div>
 
                 <!-- 右：価格・日時 -->
