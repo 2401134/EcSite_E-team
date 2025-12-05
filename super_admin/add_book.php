@@ -1,4 +1,23 @@
-<?php session_start() ?>
+<?php
+session_start();
+if (!empty($_SESSION['alert_msg'])) {
+    echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
+    unset($_SESSION['alert_msg']); // 1回だけ出す
+}
+
+if (!isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
+if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
+    echo '<script>
+          alert("総合管理者の権限がありません");
+          history.back();
+          </script>';
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -136,7 +155,7 @@
 
             <!--ホームに戻る-->
             <div class="has-text-right mt-5">
-                <form action="admin_home.php" method="POST">
+                <form action="super_admin_home.php" method="POST">
                     <button class="button is-dark">
                     <span class="icon"><i class="fas fa-home"></i></span>
                     <span>ホームに戻る</span>
