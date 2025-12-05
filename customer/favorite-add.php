@@ -60,15 +60,6 @@ if (!isset($_SESSION['user_id'])) {
 
                 <!-- 解除 ＋ カート追加を横並びに -->
                 <div style="margin-top: 10px; display: flex; gap: 8px;">
-                    <!-- 解除ボタン -->
-                    <form action="customer_function/favarit.php" method="POST">
-                        <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
-                        <button class="button is-light">
-                            <span class="icon"><i class="fa-solid fa-trash"></i></span>
-                            <span>解除</span>
-                        </button>
-                    </form>
-
                     <!-- カート追加 -->
                     <form action="customer_function/cart_add.php" method="POST">
                         <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
@@ -78,8 +69,15 @@ if (!isset($_SESSION['user_id'])) {
                         </button>
                     </form>
                 </div>
-
             <?php } ?>
+                  <!-- 解除ボタン -->
+                    <form action="customer_function/favarit.php" method="POST">
+                        <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
+                        <button class="button is-light">
+                            <span class="icon"><i class="fa-solid fa-trash"></i></span>
+                            <span>解除</span>
+                        </button>
+                    </form>
           </div><!-- /右 -->
 
         </div><!-- /columns -->
