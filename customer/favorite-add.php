@@ -45,32 +45,15 @@ if (!isset($_SESSION['user_id'])) {
 
           <!-- 右：購入情報 -->
           <div class="column is-narrow has-text-right">
+
             <?php if (!empty($book['purchase_date'])) { ?>
+
+                <!-- 購入済み表示 -->
                 <p class="is-size-5"><strong><?= htmlspecialchars($book['price']) ?>円</strong></p>
                 <p class="is-size-7"><?= htmlspecialchars(date('Y年m月d日', strtotime($book['purchase_date']))) ?>に購入</p>
 
-            <?php } else { ?>
-                <p class="is-size-6"><?= htmlspecialchars($book['price']) ?>円</p>
-                <p class="is-size-6">この商品は未購入です</p>
-
-                <form action="purchase.php" method="POST">
-                    <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
-                    <button class="button is-dark"><span>購入する</span></button>
-                </form>
-
-                <!-- 解除 ＋ カート追加を横並びに -->
-                <div style="margin-top: 10px; display: flex; gap: 8px;">
-                    <!-- カート追加 -->
-                    <form action="customer_function/cart_add.php" method="POST">
-                        <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
-                        <button class="button is-info">
-                            <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
-                            <span>カート</span>
-                        </button>
-                    </form>
-                </div>
-            <?php } ?>
-                  <!-- 解除ボタン -->
+                <!-- 横並び：解除のみ -->
+                <div style="margin-top: 10px; display: flex; gap: 8px; justify-content: flex-end;">
                     <form action="customer_function/favarit.php" method="POST">
                         <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
                         <button class="button is-light">
@@ -78,6 +61,45 @@ if (!isset($_SESSION['user_id'])) {
                             <span>解除</span>
                         </button>
                     </form>
+                </div>
+
+            <?php } else { ?>
+
+                <!-- 未購入表示 -->
+                <p class="is-size-6"><?= htmlspecialchars($book['price']) ?>円</p>
+                <p class="is-size-6">この商品は未購入です</p>
+
+                <!-- 購入ボタン -->
+                <form action="purchase.php" method="POST">
+                    <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
+                    <button class="button is-dark"><span>購入する</span></button>
+                </form>
+
+                <!-- カート + 解除 横並び -->
+                <div style="margin-top: 10px; display: flex; gap: 8px; justify-content: flex-end;">
+
+                    <!-- カート -->
+                    <form action="customer_function/cart_add.php" method="POST">
+                        <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
+                        <button class="button is-info">
+                            <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
+                            <span>カート</span>
+                        </button>
+                    </form>
+
+                    <!-- 解除 -->
+                    <form action="customer_function/favarit.php" method="POST">
+                        <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['book_id']) ?>">
+                        <button class="button is-light">
+                            <span class="icon"><i class="fa-solid fa-trash"></i></span>
+                            <span>解除</span>
+                        </button>
+                    </form>
+
+                </div>
+
+            <?php } ?>
+
           </div><!-- /右 -->
 
         </div><!-- /columns -->
