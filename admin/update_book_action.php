@@ -5,10 +5,16 @@ require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// ---- セッションチェック ----
 if (!isset($_SESSION['admin_id'])) {
-    echo "エラー：管理者としてログインしていません。<br>";
-    echo '<a href="../Alogin-input.php">ログイン画面へ</a>';
+    http_response_code(404);
+    exit;
+}
+
+if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
+    echo '<script>
+          alert("総合管理者の権限がありません");
+          history.back();
+          </script>';
     exit;
 }
 
@@ -113,7 +119,7 @@ $log_stmt->execute();
 
     <div class="box has-text-centered">
 
-      <h1 class="title is-4 has-text-success"> 更新が完了しました！</h1>
+      <h1 class="title is-4 has-text-success">✅ 更新が完了しました！</h1>
 
       <p class="mb-4">書籍情報の更新が正常に完了しました。</p>
 
