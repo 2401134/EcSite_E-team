@@ -5,7 +5,7 @@ require 'db-connect.php';
 
 $pdo = new PDO($connect, USER, PASS);
 $user_id = $_SESSION['user_id'] ?? null;
-$book_id = $_GET['book_id'] ?? 0;
+$book_id = $_GET['book_id'] ?? $_POST['book_id'] ?? 0;
 
 /* ---------------------------------------------------------
    🔹 指定ユーザーが指定の書籍を購入しているかチェック
