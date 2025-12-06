@@ -12,13 +12,11 @@ if (!isset($_SESSION['admin_id'])) {
     exit;
 }
 
-if (!isset($_SESSION['super_admin']) || $_SESSION['super_admin'] != 0) {
-    echo '<script>
-          alert("総合管理者の権限がありません");
-          history.back();
-          </script>';
-    exit;
+if (isset($_SESSION["alert_msg"])) {
+    echo '<script>alert("' . $_SESSION['alert_msg'] . '");</script>';
+    unset($_SESSION["alert_msg"]);
 }
+
 $admin_id = $_SESSION['admin_id'];
 
 

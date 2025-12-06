@@ -1,5 +1,17 @@
-<?php session_start() ?>
+<?php
+session_start();
 
+if (!isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
+if (isset($_SESSION["alert_msg"])) {
+    echo '<script>alert("' . $_SESSION['alert_msg'] . '");</script>';
+    unset($_SESSION["alert_msg"]);
+}
+
+?>
 
 <!DOCTYPE html>
 <html>

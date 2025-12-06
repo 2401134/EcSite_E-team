@@ -2,6 +2,11 @@
 session_start();
 require 'db-connect.php';
 
+if (!isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
 $pdo = new PDO($connect, USER, PASS);
 
 $filter = $_GET['filter'] ?? 'user'; 

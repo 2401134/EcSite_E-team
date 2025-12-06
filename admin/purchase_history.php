@@ -25,7 +25,7 @@ $user_id = $_GET['user_id'];
 // DB 接続
 $pdo = new PDO($connect, USER, PASS);
 
-// 購入履歴取得
+// 購入履歴取得 
 $sql = "SELECT p.*, b.title, b.synopsis, b.book_image
         FROM purchases p
         JOIN books b ON p.book_id = b.book_id

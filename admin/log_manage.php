@@ -1,4 +1,11 @@
-<?php require 'admin_function/logs.php' ?>
+<?php
+require 'admin_function/logs.php';
+
+if (isset($_SESSION["alert_msg"])) {
+    echo '<script>alert("' . $_SESSION['alert_msg'] . '");</script>';
+    unset($_SESSION["alert_msg"]);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="ja">

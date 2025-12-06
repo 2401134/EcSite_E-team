@@ -1,7 +1,18 @@
 <?php
+session_start();
 require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+if (!isset($_SESSION['admin_id'])) {
+    http_response_code(404);
+    exit;
+}
+
+if (isset($_SESSION["alert_msg"])) {
+    echo '<script>alert("' . $_SESSION['alert_msg'] . '");</script>';
+    unset($_SESSION["alert_msg"]);
+}
 
 // ------------------------------
 // GET: user_id を受け取る
