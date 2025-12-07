@@ -1,5 +1,5 @@
 <?php
-require 'admin_function/logs.php';
+require 'super_admin_function/logs.php';
 
 if (!empty($_SESSION['alert_msg'])) {
     echo "<script>alert('" . $_SESSION['alert_msg'] . "');</script>";
