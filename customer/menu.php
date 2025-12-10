@@ -38,11 +38,17 @@
         <span class="icon"><i class="fas fa-user"></i></span>
         <span>マイページ</span>
       </a>
-      
-      <a href="login-input.php" class="button is-danger">
-        <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
-        <span>ログイン</span>
-      </a>
+      <?php if(isset($_SESSION['user_id'])): ?>
+        <a href="logout.php" class="button is-danger">
+          <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+          <span>ログアウト</span>
+        </a>
+      <?php else: ?>
+        <a href="login-input.php" class="button is-success">
+          <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+          <span>ログイン</span>
+        </a>
+      <?php endif; ?>
     </div>
   </div>
 
