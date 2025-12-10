@@ -96,6 +96,14 @@ $history = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endforeach; ?>
 <?php endif; ?>
 
+<div class="has-text-right mt-5">
+    <a href="user_manage.php" class="button is-link">ユーザー一覧へ</a>
+    <a href="admin_home.php" class="button is-black">
+        <span class="icon"><i class="fas fa-home"></i></span>
+        ホームへ戻る
+    </a>
+</div>
+
 </div>
 </section>
 

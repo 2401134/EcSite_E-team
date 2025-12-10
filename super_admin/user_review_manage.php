@@ -150,7 +150,7 @@ function starRating(int $rank): string {
 
     <div class="has-text-right mt-5">
         <a href="user_manage.php" class="button is-link">ユーザー一覧へ</a>
-        <a href="admin_home.php" class="button is-black">
+        <a href="super_admin_home.php" class="button is-black">
             <span class="icon"><i class="fas fa-home"></i></span>
             ホームへ戻る
         </a>
